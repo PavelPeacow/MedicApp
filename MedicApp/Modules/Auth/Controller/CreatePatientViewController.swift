@@ -9,7 +9,7 @@ import UIKit
 
 class CreatePatientViewController: UIViewController {
     
-    lazy var stackViewDescription: UIStackView = {
+    private lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [stackViewTitleAndBtn, mainDescription, additionalDescription, stackViewInput])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -19,7 +19,7 @@ class CreatePatientViewController: UIViewController {
         return stackView
     }()
     
-    lazy var stackViewTitleAndBtn: UIStackView = {
+    private lazy var stackViewTitleAndBtn: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [cardTitle, skipBtn])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -29,7 +29,7 @@ class CreatePatientViewController: UIViewController {
         return stackView
     }()
     
-    lazy var cardTitle: UILabel = {
+    private lazy var cardTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.text = "Создание карты пациента"
@@ -37,7 +37,7 @@ class CreatePatientViewController: UIViewController {
         return label
     }()
     
-    lazy var skipBtn: UIButton = {
+    private lazy var skipBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Пропустить", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
@@ -45,7 +45,7 @@ class CreatePatientViewController: UIViewController {
         return btn
     }()
     
-    lazy var mainDescription: UILabel = {
+    private lazy var mainDescription: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.text = "Без карты пациента вы не сможете заказать анализы."
@@ -54,7 +54,7 @@ class CreatePatientViewController: UIViewController {
         return label
     }()
     
-    lazy var additionalDescription: UILabel = {
+    private lazy var additionalDescription: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.text = "В картах пациентов будут храниться результаты анализов вас и ваших близких."
@@ -63,7 +63,7 @@ class CreatePatientViewController: UIViewController {
         return label
     }()
     
-    lazy var stackViewInput: UIStackView = {
+    private lazy var stackViewInput: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameTextfield, secondNameTextfield, surnameTextfield, birthDateTextfield, sexTextfield, logInBtn])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -73,89 +73,29 @@ class CreatePatientViewController: UIViewController {
         return stackView
     }()
     
-    lazy var nameTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
+    private lazy var nameTextfield: InputTextfield = {
+        let textField = InputTextfield(placeholder: "Имя")
         return textField
     }()
     
-    lazy var secondNameTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
+    private lazy var secondNameTextfield: InputTextfield = {
+        let textField = InputTextfield(placeholder: "Фамилия")
         return textField
     }()
     
-    lazy var surnameTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
+    private lazy var surnameTextfield: InputTextfield = {
+        let textField = InputTextfield(placeholder: "Отчество")
         return textField
     }()
     
-    lazy var birthDateTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
+    private lazy var birthDateTextfield: UITextField = {
+        let textField = InputTextfield(placeholder: "Дата рождения")
         textField.inputView = datePicker
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
         return textField
     }()
     
-    lazy var sexTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
+    private lazy var sexTextfield: InputTextfield = {
+        let textField = InputTextfield(placeholder: "Пол")
         return textField
     }()
     
@@ -168,7 +108,7 @@ class CreatePatientViewController: UIViewController {
         return picker
     }()
     
-    lazy var logInBtn: UIButton = {
+    private lazy var logInBtn: UIButton = {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .blue
@@ -189,7 +129,7 @@ class CreatePatientViewController: UIViewController {
     
 }
 
-extension CreatePatientViewController {
+private extension CreatePatientViewController {
     
     @objc func didEnterDate(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
@@ -201,7 +141,7 @@ extension CreatePatientViewController {
 }
 
 
-extension CreatePatientViewController {
+private extension CreatePatientViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([

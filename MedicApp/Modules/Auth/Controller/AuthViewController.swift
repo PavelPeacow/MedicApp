@@ -9,7 +9,7 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
-    lazy var stackViewWelcome: UIStackView = {
+    private lazy var stackViewWelcome: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [welcomeTitle, welcomeDescription])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -19,21 +19,21 @@ class AuthViewController: UIViewController {
         return stackView
     }()
     
-    lazy var welcomeTitle: UILabel = {
+    private lazy var welcomeTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .black)
         label.text = "✋ Добро пожаловать!"
         return label
     }()
     
-    lazy var welcomeDescription: UILabel = {
+    private lazy var welcomeDescription: UILabel = {
         let label = UILabel()
         label.text = "Войдите, чтобы пользоваться функциями приложения"
         label.numberOfLines = 0
         return label
     }()
     
-    lazy var stackViewAuthMain: UIStackView = {
+    private lazy var stackViewAuthMain: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [stackViewAuth, logInBtn])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -43,7 +43,7 @@ class AuthViewController: UIViewController {
         return stackView
     }()
     
-    lazy var stackViewAuth: UIStackView = {
+    private lazy var stackViewAuth: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [textfieldLabel, emailTextfield])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -53,7 +53,7 @@ class AuthViewController: UIViewController {
         return stackView
     }()
     
-    lazy var textfieldLabel: UILabel = {
+    private lazy var textfieldLabel: UILabel = {
         let label = UILabel()
         label.text = "Вход по E-mail"
         label.font = .systemFont(ofSize: 14)
@@ -61,26 +61,14 @@ class AuthViewController: UIViewController {
         return label
     }()
     
-    lazy var emailTextfield: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@mail.ru"
-        
-        let paddingViewLeft = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.leftView = paddingViewLeft
-        textField.leftViewMode = .always
-        
-        let paddingViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        textField.rightView = paddingViewRight
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .systemGray6
-        textField.keyboardType = .emailAddress
+    private lazy var emailTextfield: InputTextfield = {
+        let textField = InputTextfield(placeholder: "example@mail.ru", keyboardType: .emailAddress)
         textField.delegate = self
         textField.addTarget(self, action: #selector(didEditingChange), for: .editingChanged)
         return textField
     }()
     
-    lazy var logInBtn: UIButton = {
+    private lazy var logInBtn: UIButton = {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .blue
@@ -89,7 +77,7 @@ class AuthViewController: UIViewController {
         return btn
     }()
     
-    lazy var stackViewYandexAuth: UIStackView = {
+    private lazy var stackViewYandexAuth: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [yandexTitle, logInBtnYandex])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -99,7 +87,7 @@ class AuthViewController: UIViewController {
         return stackView
     }()
     
-    lazy var yandexTitle: UILabel = {
+    private lazy var yandexTitle: UILabel = {
         let label = UILabel()
         label.text = "Или войдите с помощью"
         label.font = .systemFont(ofSize: 15)
@@ -108,7 +96,7 @@ class AuthViewController: UIViewController {
         return label
     }()
     
-    lazy var logInBtnYandex: UIButton = {
+    private lazy var logInBtnYandex: UIButton = {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .white
@@ -155,7 +143,7 @@ class AuthViewController: UIViewController {
     
 }
 
-extension AuthViewController {
+private extension AuthViewController {
     
     @objc func didTapLogInBtn() {
         if validateEmail(emailTextfield.text ?? "") {
@@ -167,6 +155,10 @@ extension AuthViewController {
         
     }
     
+    @objc func didEditingChange(_ sender: UITextField) {
+        setBtnState(text: sender.text)
+    }
+    
 }
 
 extension AuthViewController: UITextFieldDelegate {
@@ -176,13 +168,9 @@ extension AuthViewController: UITextFieldDelegate {
         return false
     }
     
-    @objc func didEditingChange(_ sender: UITextField) {
-        setBtnState(text: sender.text)
-    }
-    
 }
 
-extension AuthViewController {
+private extension AuthViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([

@@ -10,9 +10,9 @@ import Security
 
 class CreatePasswordViewController: UIViewController {
     
-    var numberButtons: [UIButton] = []
-    var dots = [UIView]()
-    var password = "" {
+    private var numberButtons: [UIButton] = []
+    private var dots = [UIView]()
+    private var password = "" {
         willSet {
             if newValue.count == 4 {
                 savePasswordToKeyChain(password: newValue)
@@ -21,7 +21,7 @@ class CreatePasswordViewController: UIViewController {
         }
     }
     
-    lazy var stackViewDescription: UIStackView = {
+    private lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [passwordTitle, passwordDescription])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -31,7 +31,7 @@ class CreatePasswordViewController: UIViewController {
         return stackView
     }()
     
-    lazy var passwordTitle: UILabel = {
+    private lazy var passwordTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.text = "Создайте пароль"
@@ -39,7 +39,7 @@ class CreatePasswordViewController: UIViewController {
         return label
     }()
     
-    lazy var passwordDescription: UILabel = {
+    private lazy var passwordDescription: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.text = "Для защиты ваших персональных данных"
@@ -49,7 +49,7 @@ class CreatePasswordViewController: UIViewController {
         return label
     }()
                                     
-    lazy var stackViewDots: UIStackView = {
+    private lazy var stackViewDots: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -59,7 +59,7 @@ class CreatePasswordViewController: UIViewController {
         return stackView
     }()
     
-    lazy var stackViewMain: UIStackView = {
+    private lazy var stackViewMain: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -69,7 +69,7 @@ class CreatePasswordViewController: UIViewController {
         return stackView
     }()
     
-    lazy var skipBtn: UIButton = {
+    private lazy var skipBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Пропустить", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
@@ -192,7 +192,7 @@ class CreatePasswordViewController: UIViewController {
     
 }
 
-extension CreatePasswordViewController {
+private extension CreatePasswordViewController {
     
     @objc func numberButtonPressed(_ sender: UIButton) {
         guard password.count < 4 else { return }
@@ -227,7 +227,7 @@ extension CreatePasswordViewController {
     
 }
 
-extension CreatePasswordViewController {
+private extension CreatePasswordViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([

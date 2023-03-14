@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
+		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
 		B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8F29B9C7230040F0F4 /* SceneDelegate.swift */; };
 		B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD9129B9C7230040F0F4 /* OnboardingPageViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
+		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5A9FD8F29B9C7230040F0F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5952D5F29C0D71100DD8427 /* Subclass */ = {
+			isa = PBXGroup;
+			children = (
+				B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */,
+				B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */,
+			);
+			path = Subclass;
+			sourceTree = "<group>";
+		};
 		B5A9FD8129B9C7230040F0F4 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				B5BBDA7B29B9DDB700F367AA /* App */,
+				B5952D5F29C0D71100DD8427 /* Subclass */,
 				B5BBDA8A29BB72D700F367AA /* Modules */,
 				B5BBDA7C29B9DDBD00F367AA /* Resources */,
 				B5A9FD9B29B9C7250040F0F4 /* Info.plist */,
@@ -234,8 +248,10 @@
 				B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */,
 				B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */,
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
+				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
+				B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */,
 				B5A9FDA229B9C9870040F0F4 /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

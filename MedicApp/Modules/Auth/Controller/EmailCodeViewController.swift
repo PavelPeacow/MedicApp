@@ -9,12 +9,12 @@ import UIKit
 
 class EmailCodeViewController: UIViewController {
     
-    var timer: Timer?
-    var counter = 5
+    private var timer: Timer?
+    private var counter = 5
     
-    var needCode = "1121"
+    private var needCode = "1121"
     
-    lazy var stackViewMain: UIStackView = {
+    private lazy var stackViewMain: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [emailTitle, stackViewTextfields, tryAgainLabel, tryAgainBtn])
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -24,7 +24,7 @@ class EmailCodeViewController: UIViewController {
         return stackView
     }()
     
-    lazy var emailTitle: UILabel = {
+    private lazy var emailTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.text = "Введите код из E-mail"
@@ -32,7 +32,7 @@ class EmailCodeViewController: UIViewController {
         return label
     }()
     
-    lazy var stackViewTextfields: UIStackView = {
+    private lazy var stackViewTextfields: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [textFieldFirstNumber, textFieldSecondNumber, textFieldThridNumber, textFieldFourthNumber])
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -41,51 +41,31 @@ class EmailCodeViewController: UIViewController {
         return stackView
     }()
     
-    lazy var textFieldFirstNumber: UITextField = {
-        let textField = UITextField()
-        textField.keyboardType = .numberPad
-        textField.backgroundColor = .systemGray6
-        textField.textAlignment = .center
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
-        textField.layer.cornerRadius = 10
+    private lazy var textFieldFirstNumber: UITextField = {
+        let textField = EmailCodeTextfield()
         textField.delegate = self
         return textField
     }()
     
-    lazy var textFieldSecondNumber: UITextField = {
-        let textField = UITextField()
-        textField.keyboardType = .numberPad
-        textField.backgroundColor = .systemGray6
-        textField.textAlignment = .center
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
-        textField.layer.cornerRadius = 10
+    private lazy var textFieldSecondNumber: UITextField = {
+        let textField = EmailCodeTextfield()
         textField.delegate = self
         return textField
     }()
     
-    lazy var textFieldThridNumber: UITextField = {
-        let textField = UITextField()
-        textField.keyboardType = .numberPad
-        textField.backgroundColor = .systemGray6
-        textField.textAlignment = .center
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
-        textField.layer.cornerRadius = 10
+    private lazy var textFieldThridNumber: UITextField = {
+        let textField = EmailCodeTextfield()
         textField.delegate = self
         return textField
     }()
     
-    lazy var textFieldFourthNumber: UITextField = {
-        let textField = UITextField()
-        textField.keyboardType = .numberPad
-        textField.backgroundColor = .systemGray6
-        textField.textAlignment = .center
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
-        textField.layer.cornerRadius = 10
+    private lazy var textFieldFourthNumber: EmailCodeTextfield = {
+        let textField = EmailCodeTextfield()
         textField.delegate = self
         return textField
     }()
     
-    lazy var tryAgainLabel: UILabel = {
+    private lazy var tryAgainLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .secondaryLabel
@@ -95,7 +75,7 @@ class EmailCodeViewController: UIViewController {
         return label
     }()
     
-    lazy var tryAgainBtn: UIButton = {
+    private lazy var tryAgainBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Отправить заново", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
@@ -129,13 +109,11 @@ class EmailCodeViewController: UIViewController {
     }
     
     private func getEnterdCode() -> String {
-        var code = ""
         [textFieldFirstNumber, textFieldSecondNumber, textFieldThridNumber, textFieldFourthNumber]
-            .forEach { code.append($0.text ?? "") }
-        return code
+            .reduce(into: "", { $0.append($1.text ?? "") })
     }
     
-    func getNextTextfield(textField: UITextField) {
+    private func getNextTextfield(textField: UITextField) {
         if textField == textFieldFirstNumber {
             textFieldSecondNumber.becomeFirstResponder()
         } else if textField == textFieldSecondNumber {
@@ -147,7 +125,7 @@ class EmailCodeViewController: UIViewController {
         }
     }
     
-    func getPreviousTextfield(textField: UITextField) {
+    private func getPreviousTextfield(textField: UITextField) {
         if textField == textFieldFourthNumber {
             textFieldThridNumber.becomeFirstResponder()
         } else if textField == textFieldThridNumber {
@@ -161,7 +139,7 @@ class EmailCodeViewController: UIViewController {
     
 }
 
-extension EmailCodeViewController {
+private extension EmailCodeViewController {
     
     @objc func updateTimer() {
         if counter > 0 {
@@ -210,7 +188,7 @@ extension EmailCodeViewController: UITextFieldDelegate {
 
 }
 
-extension EmailCodeViewController {
+private extension EmailCodeViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
