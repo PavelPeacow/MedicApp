@@ -12,14 +12,7 @@ class EmailCodeViewController: UIViewController {
     var timer: Timer?
     var counter = 5
     
-    var enteredCode = "" {
-        willSet {
-            if newValue == needCode {
-                navigationController?.setViewControllers([CreatePasswordViewController()], animated: true)
-            }
-        }
-    }
-    var needCode = "1111"
+    var needCode = "1121"
     
     lazy var stackViewMain: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [emailTitle, stackViewTextfields, tryAgainLabel, tryAgainBtn])
@@ -135,6 +128,13 @@ class EmailCodeViewController: UIViewController {
         textFieldFourthNumber.addTarget(self, action: #selector(didEnterNumber), for: .editingChanged)
     }
     
+    private func getEnterdCode() -> String {
+        var code = ""
+        [textFieldFirstNumber, textFieldSecondNumber, textFieldThridNumber, textFieldFourthNumber]
+            .forEach { code.append($0.text ?? "") }
+        return code
+    }
+    
     func getNextTextfield(textField: UITextField) {
         if textField == textFieldFirstNumber {
             textFieldSecondNumber.becomeFirstResponder()
@@ -198,10 +198,13 @@ extension EmailCodeViewController: UITextFieldDelegate {
     @objc func didEnterNumber(_ sender: UITextField) {
         guard let text = sender.text, !text.isEmpty else {
             getPreviousTextfield(textField: sender)
-            enteredCode.removeLast()
             return
         }
-        enteredCode.append(text)
+        
+        if getEnterdCode() == needCode {
+            print("ok!")
+            navigationController?.setViewControllers([CreatePasswordViewController()], animated: true)
+        }
         getNextTextfield(textField: sender)
     }
 

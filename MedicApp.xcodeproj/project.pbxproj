@@ -17,6 +17,8 @@
 		B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8129B9EA1200F367AA /* EmailCodeViewController.swift */; };
 		B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8329BA1C3500F367AA /* CreatePasswordViewController.swift */; };
 		B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */; };
+		B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8729BB72C800F367AA /* HomeViewController.swift */; };
+		B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8B29BB742500F367AA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		B5BBDA8129B9EA1200F367AA /* EmailCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeViewController.swift; sourceTree = "<group>"; };
 		B5BBDA8329BA1C3500F367AA /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
 		B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
+		B5BBDA8729BB72C800F367AA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B5BBDA8B29BB742500F367AA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				B5BBDA7B29B9DDB700F367AA /* App */,
-				B5BBDA7D29B9DDCB00F367AA /* Onboarding */,
-				B5BBDA8029B9DDF700F367AA /* Auth */,
+				B5BBDA8A29BB72D700F367AA /* Modules */,
 				B5BBDA7C29B9DDBD00F367AA /* Resources */,
 				B5A9FD9B29B9C7250040F0F4 /* Info.plist */,
 			);
@@ -94,8 +97,7 @@
 		B5BBDA7D29B9DDCB00F367AA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				B5A9FD9129B9C7230040F0F4 /* OnboardingPageViewController.swift */,
-				B5A9FDA129B9C9870040F0F4 /* OnboardingViewController.swift */,
+				B5BBDA8F29BB744800F367AA /* Controller */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -103,12 +105,56 @@
 		B5BBDA8029B9DDF700F367AA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B5BBDA8D29BB743600F367AA /* Controller */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		B5BBDA8929BB72CA00F367AA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B5BBDA8E29BB743D00F367AA /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B5BBDA8A29BB72D700F367AA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B5BBDA7D29B9DDCB00F367AA /* Onboarding */,
+				B5BBDA8029B9DDF700F367AA /* Auth */,
+				B5BBDA8929BB72CA00F367AA /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B5BBDA8D29BB743600F367AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				B5BBDA7E29B9DDF500F367AA /* AuthViewController.swift */,
 				B5BBDA8129B9EA1200F367AA /* EmailCodeViewController.swift */,
 				B5BBDA8329BA1C3500F367AA /* CreatePasswordViewController.swift */,
 				B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */,
 			);
-			path = Auth;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B5BBDA8E29BB743D00F367AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5BBDA8729BB72C800F367AA /* HomeViewController.swift */,
+				B5BBDA8B29BB742500F367AA /* SearchViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B5BBDA8F29BB744800F367AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5A9FD9129B9C7230040F0F4 /* OnboardingPageViewController.swift */,
+				B5A9FDA129B9C9870040F0F4 /* OnboardingViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,11 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */,
 				B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
 				B5BBDA7F29B9DDF500F367AA /* AuthViewController.swift in Sources */,
 				B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */,
 				B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */,
+				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
 				B5A9FDA229B9C9870040F0F4 /* OnboardingViewController.swift in Sources */,

@@ -144,14 +144,27 @@ class AuthViewController: UIViewController {
         
     }
     
+    func validateEmail(_ email: String) -> Bool {
+        guard let regex = try? NSRegularExpression(pattern: "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[a-z]{2,}$") else { return false }
+        if let _ = regex.firstMatch(in: email, range: NSRange(location: 0, length: email.count)) {
+            return true
+        }
+        return false
+    }
+    
     
 }
 
 extension AuthViewController {
     
     @objc func didTapLogInBtn() {
-        let vc = EmailCodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if validateEmail(emailTextfield.text ?? "") {
+            let vc = EmailCodeViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("no")
+        }
+        
     }
     
 }
