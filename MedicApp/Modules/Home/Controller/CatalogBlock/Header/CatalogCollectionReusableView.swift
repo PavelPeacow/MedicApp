@@ -7,11 +7,18 @@
 
 import UIKit
 
+protocol CatalogCollectionReusableViewDelegate: AnyObject {
+    func didSelectCategory(_ category: String, cell: CategoryCollectionViewCell)
+}
+
 class CatalogCollectionReusableView: UICollectionReusableView {
     
     static let identifier = "CatalogCollectionReusableView"
     
+    weak var delegate: CatalogCollectionReusableViewDelegate?
+    
     var categoriesTitles = [String]()
+    var selectedCell: CategoryCollectionViewCell?
     
     lazy var catalogTitle: UILabel = {
         let label = UILabel()
@@ -50,9 +57,18 @@ class CatalogCollectionReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(title: String, categoriesDataSource: [String]) {
+    func configure(title: String, categoriesDataSource: [String], selectedCategory: CategoryCollectionViewCell?) {
         catalogTitle.text = title
         categoriesTitles = categoriesDataSource
+        
+        if let category = selectedCategory {
+            selectedCell = category
+        } else {
+            layoutIfNeeded()
+            selectedCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoryCollectionViewCell
+            selectedCell?.setSelected()
+        }
+        
     }
         
 }
@@ -76,7 +92,16 @@ extension CatalogCollectionReusableView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = categoriesTitles[indexPath.item]
-        print(item)
+        let cell = collectionView.cellForItem(at: indexPath) as! CategoryCollectionViewCell
+
+        guard cell != selectedCell else {
+            return
+        }
+        selectedCell?.setUnSelected()
+        selectedCell = cell
+        cell.setSelected()
+        
+        delegate?.didSelectCategory(item, cell: cell)
     }
     
 }

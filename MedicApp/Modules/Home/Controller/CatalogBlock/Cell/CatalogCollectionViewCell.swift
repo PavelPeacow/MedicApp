@@ -24,7 +24,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     lazy var catalogItemTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
     
@@ -33,7 +33,6 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .horizontal
-        stackView.spacing = 150
         return stackView
     }()
     
@@ -107,6 +106,9 @@ extension CatalogCollectionViewCell {
             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            
+            catalogItemAddBtn.heightAnchor.constraint(equalToConstant: 40),
+            catalogItemAddBtn.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
     

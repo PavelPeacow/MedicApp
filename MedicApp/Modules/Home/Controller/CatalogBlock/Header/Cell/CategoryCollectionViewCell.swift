@@ -13,7 +13,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     lazy var categoryTitle: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -22,7 +23,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(categoryTitle)
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .systemGray6
         contentView.layer.cornerRadius = 12
         
         setConstraints()
@@ -34,6 +35,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     func configure(title: String) {
         categoryTitle.text = title
+    }
+    
+    func setSelected() {
+        contentView.backgroundColor = .blue
+        categoryTitle.textColor = .white
+    }
+    
+    func setUnSelected() {
+        contentView.backgroundColor = .systemGray6
+        categoryTitle.textColor = .gray
     }
     
 }

@@ -23,9 +23,9 @@ class APIManager {
         self.urlSecssion = urlSecssion
     }
     
-    func makeAPICall<T: Codable>(type: T.Type) throws -> T {
+    func makeAPICall<T: Codable>(type: T.Type, fileName: String) throws -> T {
         
-        guard let file = Bundle.main.url(forResource: "NewsMock", withExtension: "json") else { throw APIError.noFile }
+        guard let file = Bundle.main.url(forResource: fileName, withExtension: "json") else { throw APIError.noFile }
         
         guard let data = try? Data(contentsOf: file) else { throw APIError.canNotGet }
         

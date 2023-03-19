@@ -46,10 +46,10 @@ extension NSCollectionLayoutSection {
     
     static func catalogSection() -> NSCollectionLayoutSection {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(150))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -72,6 +72,10 @@ class HomeViewController: UIViewController {
     lazy var trainlingConstraint = NSLayoutConstraint()
     
     var news = [News]()
+    lazy var catalog = [CatalogItem]()
+    lazy var filteredArrat = [CatalogItem]()
+    
+    var selectedCategory: CategoryCollectionViewCell?
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: SearchViewController())
@@ -109,10 +113,16 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         do {
-            let res = try APIManager().makeAPICall(type: [News].self)
-            news = res
+            let news = try APIManager().makeAPICall(type: [News].self, fileName: "NewsMock")
+            let catalog = try APIManager().makeAPICall(type: [CatalogItem].self, fileName: "CatalogMock")
+            
+            self.news = news
+            self.catalog = catalog
+
+            filteredArrat = catalog.filter { $0.category == "Популярные" }
+            
             collectionView.reloadData()
-            print(res)
+            print(catalog)
         } catch {
             print(error)
         }
@@ -132,6 +142,10 @@ class HomeViewController: UIViewController {
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             trainlingConstraint.isActive = true
         }
+    }
+    
+    func getCategories() -> [String] {
+        Set(catalog.map { $0.category }).sorted(by: { $0 > $1 })
     }
     
     
@@ -166,7 +180,13 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        switch Sections.allCases[section] {
+            
+        case .newsBlock:
+            return news.count
+        case .catalog:
+            return filteredArrat.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,7 +204,9 @@ extension HomeViewController: UICollectionViewDataSource {
         case .catalog:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogCollectionViewCell.identifier, for: indexPath) as! CatalogCollectionViewCell
             
-            cell.configure(title: "ПЦР-тест на определение РНК коронавируса стандартный", date: "2 дня", price: "1800 ₽")
+            let catalogItem = filteredArrat[indexPath.row]
+            
+            cell.configure(title: catalogItem.name, date: catalogItem.time_result, price: catalogItem.price + " ₽")
             
             return cell
         }
@@ -207,9 +229,12 @@ extension HomeViewController: UICollectionViewDataSource {
         case .catalog:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CatalogCollectionReusableView.identifier, for: indexPath) as! CatalogCollectionReusableView
             
-            let section = Sections.allCases[indexPath.section]
+            header.delegate = self
             
-            header.configure(title: section.sectionTitle, categoriesDataSource: ["Популярные", "Covid" , "Комплексные"])
+            let section = Sections.allCases[indexPath.section]
+            let categories = getCategories()
+            
+            header.configure(title: section.sectionTitle, categoriesDataSource: categories, selectedCategory: selectedCategory)
             
             return header
         }
@@ -219,6 +244,19 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController: UICollectionViewDelegate {
+    
+}
+
+extension HomeViewController: CatalogCollectionReusableViewDelegate {
+    
+    func didSelectCategory(_ category: String, cell: CategoryCollectionViewCell) {
+        selectedCategory = cell
+        filteredArrat = catalog.filter { $0.category == category }
+        UIView.transition(with: collectionView, duration: 0.15, options: .transitionCrossDissolve) {
+            self.collectionView.reloadData()
+        }
+
+    }
     
 }
 
