@@ -41,6 +41,8 @@ class CatalogCollectionReusableView: UICollectionReusableView {
         addSubview(catalogTitle)
         addSubview(collectionView)
         
+        backgroundColor = .white
+        
         setConstraints()
     }
     
@@ -90,7 +92,7 @@ extension CatalogCollectionReusableView {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: catalogTitle.bottomAnchor, constant: 16),
             collectionView.heightAnchor.constraint(equalToConstant: 50),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
         ])
     }
     

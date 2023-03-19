@@ -28,13 +28,13 @@ extension NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(150), heightDimension: .absolute(150))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(280), heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 16
         section.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(25))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -56,8 +56,9 @@ extension NSCollectionLayoutSection {
         section.interGroupSpacing = 16
         section.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(65))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        header.pinToVisibleBounds = true
         
         section.boundarySupplementaryItems = [header]
         
@@ -69,6 +70,8 @@ extension NSCollectionLayoutSection {
 class HomeViewController: UIViewController {
     
     lazy var trainlingConstraint = NSLayoutConstraint()
+    
+    var news = [News]()
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: SearchViewController())
@@ -104,6 +107,16 @@ class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         view.backgroundColor = .systemBackground
+        
+        do {
+            let res = try APIManager().makeAPICall(type: [News].self)
+            news = res
+            collectionView.reloadData()
+            print(res)
+        } catch {
+            print(error)
+        }
+        
         
         navigationItem.searchController = searchController
         
@@ -163,7 +176,9 @@ extension HomeViewController: UICollectionViewDataSource {
         case .newsBlock:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
             
-            cell.configure(title: "Чек-ап для мужчин")
+            let newsItem = news[indexPath.item]
+
+            cell.configure(news: newsItem)
             
             return cell
         case .catalog:
@@ -212,7 +227,7 @@ extension HomeViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

@@ -13,6 +13,10 @@
 		B53A1B9429C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1B9329C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift */; };
 		B53A1B9629C6EC3B00ED8F84 /* NewsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1B9529C6EC3B00ED8F84 /* NewsCollectionReusableView.swift */; };
 		B53A1B9A29C6F37F00ED8F84 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1B9929C6F37F00ED8F84 /* CategoryCollectionViewCell.swift */; };
+		B53A1B9C29C6FAE800ED8F84 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1B9B29C6FAE800ED8F84 /* APIManager.swift */; };
+		B53A1B9F29C6FB7A00ED8F84 /* NewsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = B53A1B9E29C6FB7A00ED8F84 /* NewsMock.json */; };
+		B53A1BA129C6FB9700ED8F84 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BA029C6FB9700ED8F84 /* News.swift */; };
+		B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */; };
 		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
 		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
@@ -37,6 +41,10 @@
 		B53A1B9329C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionReusableView.swift; sourceTree = "<group>"; };
 		B53A1B9529C6EC3B00ED8F84 /* NewsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionReusableView.swift; sourceTree = "<group>"; };
 		B53A1B9929C6F37F00ED8F84 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		B53A1B9B29C6FAE800ED8F84 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		B53A1B9E29C6FB7A00ED8F84 /* NewsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NewsMock.json; sourceTree = "<group>"; };
+		B53A1BA029C6FB9700ED8F84 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewURL.swift; sourceTree = "<group>"; };
 		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
 		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,11 +103,30 @@
 			path = NewsBlock;
 			sourceTree = "<group>";
 		};
+		B53A1B9D29C6FAEC00ED8F84 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1B9B29C6FAE800ED8F84 /* APIManager.swift */,
+				B53A1B9E29C6FB7A00ED8F84 /* NewsMock.json */,
+			);
+			name = Service;
+			path = Subclass/Service;
+			sourceTree = "<group>";
+		};
+		B53A1BA229C6FB9900ED8F84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BA029C6FB9700ED8F84 /* News.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B5952D5F29C0D71100DD8427 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
 				B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */,
 				B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */,
+				B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */,
 			);
 			path = Subclass;
 			sourceTree = "<group>";
@@ -124,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				B5BBDA7B29B9DDB700F367AA /* App */,
+				B53A1BA229C6FB9900ED8F84 /* Model */,
+				B53A1B9D29C6FAEC00ED8F84 /* Service */,
 				B5952D5F29C0D71100DD8427 /* Subclass */,
 				B5BC185029C1F33F00809824 /* Service */,
 				B5BBDA8A29BB72D700F367AA /* Modules */,
@@ -291,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5A9FD9A29B9C7250040F0F4 /* LaunchScreen.storyboard in Resources */,
+				B53A1B9F29C6FB7A00ED8F84 /* NewsMock.json in Resources */,
 				B5A9FD9729B9C7250040F0F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +334,7 @@
 			files = (
 				B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */,
 				B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */,
+				B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
 				B5BBDA7F29B9DDF500F367AA /* AuthViewController.swift in Sources */,
 				B53A1B9629C6EC3B00ED8F84 /* NewsCollectionReusableView.swift in Sources */,
@@ -314,11 +345,13 @@
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B53A1B9A29C6F37F00ED8F84 /* CategoryCollectionViewCell.swift in Sources */,
 				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,
+				B53A1B9C29C6FAE800ED8F84 /* APIManager.swift in Sources */,
 				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
 				B53A1B9229C6E88A00ED8F84 /* CatalogCollectionViewCell.swift in Sources */,
 				B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */,
+				B53A1BA129C6FB9700ED8F84 /* News.swift in Sources */,
 				B5A9FDA229B9C9870040F0F4 /* OnboardingViewController.swift in Sources */,
 				B53A1B8D29C6DCC600ED8F84 /* SearchTableViewCell.swift in Sources */,
 			);
