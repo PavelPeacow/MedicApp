@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class AuthViewController: UIViewController {
     
@@ -139,16 +140,37 @@ class AuthViewController: UIViewController {
         }
         return false
     }
-    
+        
     
 }
+
+
 
 private extension AuthViewController {
     
     @objc func didTapLogInBtn() {
+
         if validateEmail(emailTextfield.text ?? "") {
-            let vc = EmailCodeViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            
+            KeychainManager.email = emailTextfield.text ?? ""
+    
+            if let savedEmail = KeychainManager.default.get(key: KeychainManager.keys.emailkey), let str = String(data: savedEmail, encoding: .utf8) {
+                if str == emailTextfield.text ?? "" {
+                    print("ok!!!")
+                    let vc = EmailCodeViewController()
+                    navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let vc = EmailCodeViewController()
+                    KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            } else {
+                let vc = EmailCodeViewController()
+                KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            
         } else {
             print("no")
         }

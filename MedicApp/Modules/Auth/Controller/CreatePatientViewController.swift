@@ -9,6 +9,8 @@ import UIKit
 
 class CreatePatientViewController: UIViewController {
     
+    private let sexes = ["Мужской", "Женский"]
+    
     private lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [stackViewTitleAndBtn, mainDescription, additionalDescription, stackViewInput])
         stackView.alignment = .fill
@@ -91,11 +93,14 @@ class CreatePatientViewController: UIViewController {
     private lazy var birthDateTextfield: UITextField = {
         let textField = InputTextfield(placeholder: "Дата рождения")
         textField.inputView = datePicker
+        textField.delegate = self
         return textField
     }()
     
     private lazy var sexTextfield: InputTextfield = {
         let textField = InputTextfield(placeholder: "Пол")
+        textField.inputView = pciker
+        textField.delegate = self
         return textField
     }()
     
@@ -105,6 +110,13 @@ class CreatePatientViewController: UIViewController {
         picker.preferredDatePickerStyle = .wheels
         picker.timeZone = .current
         picker.addTarget(self, action: #selector(didEnterDate), for: .valueChanged)
+        return picker
+    }()
+    
+    private lazy var pciker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
         return picker
     }()
     
@@ -120,12 +132,67 @@ class CreatePatientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getPacientCard()
+        
         view.backgroundColor = .systemBackground
         
         view.addSubview(stackViewDescription)
         setConstraints()
     }
     
+    func savePacientCard() {
+        KeychainManager.default.add(key: "name", data: nameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "secondName", data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "surname", data: surnameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "dateBirth", data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "sex", data: sexTextfield.text?.data(using: .utf8) ?? .init())
+    }
+    
+    func getPacientCard() {
+        nameTextfield.text = String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8)
+        secondNameTextfield.text = String(data: KeychainManager.default.get(key: "secondName") ?? .init(), encoding: .utf8)
+        surnameTextfield.text = String(data: KeychainManager.default.get(key: "surname") ?? .init(), encoding: .utf8)
+        birthDateTextfield.text = String(data: KeychainManager.default.get(key: "dateBirth") ?? .init(), encoding: .utf8)
+        sexTextfield.text = String(data: KeychainManager.default.get(key: "sex") ?? .init(), encoding: .utf8)
+    }
+    
+    
+}
+
+extension CreatePatientViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.inputView == pciker || textField.inputView == datePicker {
+            return false // Return false to forbid text input when the picker is active.
+        } else {
+            return true // Return true to allow text input when the picker is not active.
+        }
+    }
+    
+}
+
+extension CreatePatientViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        sexes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        sexes[row]
+    }
+    
+    
+}
+
+extension CreatePatientViewController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        sexTextfield.text = sexes[row]
+        sexTextfield.resignFirstResponder()
+    }
     
 }
 

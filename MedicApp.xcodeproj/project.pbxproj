@@ -21,6 +21,7 @@
 		B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */; };
 		B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8729BB72C800F367AA /* HomeViewController.swift */; };
 		B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8B29BB742500F367AA /* SearchViewController.swift */; };
+		B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC184E29C1F33200809824 /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
 		B5BBDA8729BB72C800F367AA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5BBDA8B29BB742500F367AA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B5BC184E29C1F33200809824 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				B5BBDA7B29B9DDB700F367AA /* App */,
 				B5952D5F29C0D71100DD8427 /* Subclass */,
+				B5BC185029C1F33F00809824 /* Service */,
 				B5BBDA8A29BB72D700F367AA /* Modules */,
 				B5BBDA7C29B9DDBD00F367AA /* Resources */,
 				B5A9FD9B29B9C7250040F0F4 /* Info.plist */,
@@ -171,6 +174,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		B5BC185029C1F33F00809824 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B5BC185129C1F34B00809824 /* Keychain */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B5BC185129C1F34B00809824 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				B5BC184E29C1F33200809824 /* KeychainManager.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,6 +268,7 @@
 				B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */,
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,
+				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
 				B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */,

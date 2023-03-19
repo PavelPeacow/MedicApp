@@ -8,6 +8,11 @@
 import UIKit
 import Security
 
+enum PasswordState {
+    case skipedPassword
+    case alreadyCreated
+}
+
 class CreatePasswordViewController: UIViewController {
     
     private var numberButtons: [UIButton] = []
@@ -15,11 +20,29 @@ class CreatePasswordViewController: UIViewController {
     private var password = "" {
         willSet {
             if newValue.count == 4 {
-                savePasswordToKeyChain(password: newValue)
-                navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
+                print(newValue)
+                switch state {
+                    
+                case .skipedPassword:
+                    savePasswordToKeyChain(password: newValue)
+                    navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
+                    
+                case .alreadyCreated:
+                    let savedPasswordData = KeychainManager.default.get(key: KeychainManager.keys.passwordKey)
+                    let password = String(data: savedPasswordData ?? .init(), encoding: .utf8) ?? ""
+                    print(password)
+                    if password == newValue {
+                        navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
+                    } else {
+                        print("wrong")
+                    }
+                }
+               
             }
         }
     }
+    
+    var state: PasswordState = .skipedPassword
     
     private lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [passwordTitle, passwordDescription])
@@ -73,6 +96,7 @@ class CreatePasswordViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("Пропустить", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
+        btn.addTarget(self, action: #selector(didTapSkipBtn), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -89,6 +113,11 @@ class CreatePasswordViewController: UIViewController {
         createDots()
         createButtons()
         setConstraints()
+    }
+    
+    func setPasswordState(state: PasswordState) {
+        self.state = state
+        print(state)
     }
     
     private func createDots() {
@@ -175,19 +204,7 @@ class CreatePasswordViewController: UIViewController {
     }
     
     private func savePasswordToKeyChain(password: String) {
-        let keyChain = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: "MyApp",
-            kSecValueData as String: password.data(using: .utf8) ?? .init()
-        ] as CFDictionary
-        
-        let status = SecItemAdd(keyChain, nil)
-        
-        if status == errSecSuccess {
-            print("String saved to keychain")
-        } else {
-            print("Error saving string to keychain: \(status)")
-        }
+        KeychainManager.default.add(key: KeychainManager.keys.passwordKey, data: password.data(using: .utf8) ?? Data())
     }
     
 }
@@ -199,7 +216,7 @@ private extension CreatePasswordViewController {
         guard let number = sender.title(for: .normal) else { return }
         
         password.append(number)
-        
+        print(state)
         let index = password.count - 1
         let dot = dots[index]
         dot.backgroundColor = .systemBlue
@@ -225,6 +242,11 @@ private extension CreatePasswordViewController {
         password.removeLast()
     }
     
+    @objc func didTapSkipBtn() {
+        KeychainManager.default.add(key: KeychainManager.keys.passwordKey, data: "skip".data(using: .utf8) ?? Data())
+        navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
+    }
+    
 }
 
 private extension CreatePasswordViewController {
@@ -235,16 +257,17 @@ private extension CreatePasswordViewController {
             skipBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             stackViewDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackViewDescription.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            stackViewDescription.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
             stackViewDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             stackViewDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
             stackViewDots.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewDots.topAnchor.constraint(equalTo: stackViewDescription.bottomAnchor, constant: 60),
             
-            stackViewMain.topAnchor.constraint(equalTo: stackViewDots.bottomAnchor, constant: 60),
+            stackViewMain.topAnchor.constraint(lessThanOrEqualTo: stackViewDots.bottomAnchor, constant: 60),
             stackViewMain.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             stackViewMain.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
         ])
     }
     

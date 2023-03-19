@@ -64,13 +64,15 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         return pages[index - 1]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController as! OnboardingViewController), index < pages.count - 1 else { return nil }
-        
-        if index == 1 {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if previousViewControllers.first == pages[1] {
             skipBtn.setTitle("Завершить", for: .normal)
         }
-        
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.firstIndex(of: viewController as! OnboardingViewController), index < pages.count - 1 else { return nil }
+
         return pages[index + 1]
     }
     

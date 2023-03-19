@@ -10,9 +10,13 @@ import UIKit
 class EmailCodeViewController: UIViewController {
     
     private var timer: Timer?
-    private var counter = 5
+    private var counter = 1 {
+        didSet {
+            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+        }
+    }
     
-    private var needCode = "1121"
+    private var needCode: String?
     
     private lazy var stackViewMain: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [emailTitle, stackViewTextfields, tryAgainLabel, tryAgainBtn])
@@ -87,6 +91,15 @@ class EmailCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { _, _ in
+            print("yes")
+        }
+        
+
+        
+        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
 
         view.backgroundColor = .systemBackground
@@ -94,6 +107,11 @@ class EmailCodeViewController: UIViewController {
         view.addSubview(stackViewMain)
         setConstraints()
         addTargets()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -137,6 +155,38 @@ class EmailCodeViewController: UIViewController {
         }
     }
     
+    func createRandomCode() -> String {
+        String((0..<4).map { _ in "0123456789".randomElement()! })
+    }
+    
+    func createNotification() {
+        let code = createRandomCode()
+        needCode = code
+        
+        let content = UNMutableNotificationContent()
+        content.badge = 1
+        content.title = "Code"
+        content.subtitle = code
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "lol", content: content, trigger: nil)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error displaying notification: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+}
+
+extension EmailCodeViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+    
 }
 
 private extension EmailCodeViewController {
@@ -144,14 +194,12 @@ private extension EmailCodeViewController {
     @objc func updateTimer() {
         if counter > 0 {
             counter -= 1
-            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+//            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
         } else {
-            timer?.invalidate()
-            UIView.animate(withDuration: 0.15) {
-                self.tryAgainBtn.isHidden = false
-                self.tryAgainLabel.isHidden = true
-            }
-            
+            counter = 15
+//            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+            print("che")
+            createNotification()
         }
     }
     
@@ -180,8 +228,28 @@ extension EmailCodeViewController: UITextFieldDelegate {
         }
         
         if getEnterdCode() == needCode {
-            print("ok!")
-            navigationController?.setViewControllers([CreatePasswordViewController()], animated: true)
+            
+            let vc = CreatePasswordViewController()
+            
+            if let passwordData = KeychainManager.default.get(key: KeychainManager.keys.passwordKey) {
+                if let password = String(data: passwordData, encoding: .utf8) {
+                    print(password)
+                    if password == "skip" {
+                        vc.setPasswordState(state: .skipedPassword)
+                    } else {
+                        vc.setPasswordState(state: .alreadyCreated)
+                    }
+                    
+                } else {
+                    vc.setPasswordState(state: .skipedPassword)
+                }
+                
+            } else {
+                vc.setPasswordState(state: .skipedPassword)
+            }
+            
+            navigationController?.setViewControllers([vc], animated: true)
+            
         }
         getNextTextfield(textField: sender)
     }
