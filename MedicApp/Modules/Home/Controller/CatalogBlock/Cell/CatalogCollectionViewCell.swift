@@ -7,9 +7,18 @@
 
 import UIKit
 
+protocol CatalogCollectionViewCellDelegate: AnyObject {
+    func didAddCatalogItemToCart(_ item: CatalogItem, isAddItemToCart: Bool)
+}
+
 class CatalogCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CatalogCollectionViewCell"
+    
+    weak var delegate: CatalogCollectionViewCellDelegate?
+    
+    var catalogItem: CatalogItem?
+    var isAddItemToCart = false
     
     lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [catalogItemTitle, additionalContentStackView])
@@ -68,6 +77,12 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         return btn
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        isAddItemToCart = false
+        setBtnState(isAddItemToCart: false)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -82,10 +97,27 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(title: String, date: String, price: String) {
-        catalogItemTitle.text = title
-        catalogItemDate.text = date
-        catalogItemPrice.text = price
+    func configure(catalogItem: CatalogItem) {
+        catalogItemTitle.text = catalogItem.name
+        catalogItemDate.text = catalogItem.time_result
+        catalogItemPrice.text = catalogItem.price
+        self.catalogItem = catalogItem
+    }
+    
+    func setBtnState(isAddItemToCart: Bool) {
+        if isAddItemToCart {
+            catalogItemAddBtn.setTitle("Убрать", for: .normal)
+            catalogItemAddBtn.setTitleColor(.blue, for: .normal)
+            catalogItemAddBtn.backgroundColor = .clear
+            catalogItemAddBtn.layer.borderColor = UIColor.blue.cgColor
+            catalogItemAddBtn.layer.borderWidth = 1
+        } else {
+            catalogItemAddBtn.setTitle("Добавить", for: .normal)
+            catalogItemAddBtn.setTitleColor(.white, for: .normal)
+            catalogItemAddBtn.backgroundColor = .blue
+            catalogItemAddBtn.layer.borderColor = nil
+            catalogItemAddBtn.layer.borderWidth = 0
+        }
     }
     
 }
@@ -93,7 +125,18 @@ class CatalogCollectionViewCell: UICollectionViewCell {
 extension CatalogCollectionViewCell {
     
     @objc func didTapAddBtn() {
-        print("tap add")
+        guard let catalogItem = catalogItem else { return }
+        
+        if isAddItemToCart {
+            delegate?.didAddCatalogItemToCart(catalogItem, isAddItemToCart: false)
+            setBtnState(isAddItemToCart: false)
+        } else {
+            delegate?.didAddCatalogItemToCart(catalogItem, isAddItemToCart: true)
+            setBtnState(isAddItemToCart: true)
+        }
+        
+        isAddItemToCart.toggle()
+        
     }
     
 }

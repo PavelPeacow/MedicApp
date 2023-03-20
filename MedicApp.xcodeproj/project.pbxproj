@@ -19,6 +19,10 @@
 		B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */; };
 		B53A1BA629C71B4400ED8F84 /* CatalogMock.json in Resources */ = {isa = PBXBuildFile; fileRef = B53A1BA529C71B4400ED8F84 /* CatalogMock.json */; };
 		B53A1BA829C71B5500ED8F84 /* CatalogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BA729C71B5500ED8F84 /* CatalogItem.swift */; };
+		B53A1BAF29C8633C00ED8F84 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BAE29C8633C00ED8F84 /* MainTabBarViewController.swift */; };
+		B53A1BB229C864C300ED8F84 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB129C864C300ED8F84 /* ResultViewController.swift */; };
+		B53A1BB529C864D800ED8F84 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB429C864D800ED8F84 /* ChatViewController.swift */; };
+		B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB629C8671800ED8F84 /* ToCartView.swift */; };
 		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
 		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
@@ -49,6 +53,10 @@
 		B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewURL.swift; sourceTree = "<group>"; };
 		B53A1BA529C71B4400ED8F84 /* CatalogMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CatalogMock.json; sourceTree = "<group>"; };
 		B53A1BA729C71B5500ED8F84 /* CatalogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogItem.swift; sourceTree = "<group>"; };
+		B53A1BAE29C8633C00ED8F84 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		B53A1BB129C864C300ED8F84 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		B53A1BB429C864D800ED8F84 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B53A1BB629C8671800ED8F84 /* ToCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCartView.swift; sourceTree = "<group>"; };
 		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
 		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,12 +175,30 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		B53A1BB029C8634200ED8F84 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BAE29C8633C00ED8F84 /* MainTabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		B53A1BB329C864C700ED8F84 /* EmptyTabView */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BB129C864C300ED8F84 /* ResultViewController.swift */,
+				B53A1BB429C864D800ED8F84 /* ChatViewController.swift */,
+			);
+			path = EmptyTabView;
+			sourceTree = "<group>";
+		};
 		B5952D5F29C0D71100DD8427 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
 				B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */,
 				B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */,
 				B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */,
+				B53A1BB629C8671800ED8F84 /* ToCartView.swift */,
 			);
 			path = Subclass;
 			sourceTree = "<group>";
@@ -245,6 +271,7 @@
 		B5BBDA8929BB72CA00F367AA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B53A1BB029C8634200ED8F84 /* TabBar */,
 				B5BBDA8E29BB743D00F367AA /* Controller */,
 			);
 			path = Home;
@@ -253,6 +280,7 @@
 		B5BBDA8A29BB72D700F367AA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B53A1BB329C864C700ED8F84 /* EmptyTabView */,
 				B5BBDA7D29B9DDCB00F367AA /* Onboarding */,
 				B5BBDA8029B9DDF700F367AA /* Auth */,
 				B5BBDA8929BB72CA00F367AA /* Home */,
@@ -388,6 +416,8 @@
 				B53A1B9029C6E87E00ED8F84 /* NewsCollectionViewCell.swift in Sources */,
 				B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */,
 				B53A1BA829C71B5500ED8F84 /* CatalogItem.swift in Sources */,
+				B53A1BAF29C8633C00ED8F84 /* MainTabBarViewController.swift in Sources */,
+				B53A1BB229C864C300ED8F84 /* ResultViewController.swift in Sources */,
 				B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */,
 				B53A1B9429C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift in Sources */,
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
@@ -397,8 +427,10 @@
 				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
+				B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */,
 				B53A1B9229C6E88A00ED8F84 /* CatalogCollectionViewCell.swift in Sources */,
 				B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */,
+				B53A1BB529C864D800ED8F84 /* ChatViewController.swift in Sources */,
 				B53A1BA129C6FB9700ED8F84 /* News.swift in Sources */,
 				B5A9FDA229B9C9870040F0F4 /* OnboardingViewController.swift in Sources */,
 				B53A1B8D29C6DCC600ED8F84 /* SearchTableViewCell.swift in Sources */,

@@ -77,6 +77,14 @@ class HomeViewController: UIViewController {
     
     var selectedCategory: CategoryCollectionViewCell?
     
+    var selectedItemsForBy = [CatalogItem]()
+    
+    lazy var cartView: ToCartView = {
+        let view = ToCartView()
+        view.isHidden = true
+        return view
+    }()
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: SearchViewController())
         searchController.searchResultsUpdater = self
@@ -111,6 +119,8 @@ class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         view.backgroundColor = .systemBackground
+        
+        view.addSubview(cartView)
         
         do {
             let news = try APIManager().makeAPICall(type: [News].self, fileName: "NewsMock")
@@ -206,7 +216,14 @@ extension HomeViewController: UICollectionViewDataSource {
             
             let catalogItem = filteredArrat[indexPath.row]
             
-            cell.configure(title: catalogItem.name, date: catalogItem.time_result, price: catalogItem.price + " ₽")
+            cell.delegate = self
+            
+            if selectedItemsForBy.contains(where: { $0.name == catalogItem.name }) {
+                cell.setBtnState(isAddItemToCart: true)
+                cell.isAddItemToCart = true
+            }
+            
+            cell.configure(catalogItem: catalogItem)
             
             return cell
         }
@@ -244,6 +261,16 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch Sections.allCases[indexPath.section] {
+            
+        case .newsBlock:
+            return
+        case .catalog:
+            return
+        }
+    }
+    
     
 }
 
@@ -260,6 +287,32 @@ extension HomeViewController: CatalogCollectionReusableViewDelegate {
     
 }
 
+extension HomeViewController: CatalogCollectionViewCellDelegate {
+    
+    
+    func didAddCatalogItemToCart(_ item: CatalogItem, isAddItemToCart: Bool) {
+        print(isAddItemToCart)
+        if isAddItemToCart {
+            selectedItemsForBy.append(item)
+            cartView.allPriceCount += Int(item.price) ?? 0
+        } else {
+            let removeIndex = selectedItemsForBy.firstIndex(where: { $0.name == item.name }) ?? 0
+            selectedItemsForBy.remove(at: removeIndex)
+            cartView.allPriceCount -= Int(item.price) ?? 0
+            print(removeIndex)
+            print(selectedItemsForBy)
+        }
+        
+        if selectedItemsForBy.isEmpty {
+            cartView.isHidden = true
+        } else {
+            cartView.isHidden = false
+        }
+    }
+    
+    
+}
+
 
 extension HomeViewController {
     
@@ -269,6 +322,11 @@ extension HomeViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            cartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            cartView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cartView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cartView.heightAnchor.constraint(equalToConstant: 105),
         ])
     }
     
