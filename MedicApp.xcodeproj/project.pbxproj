@@ -23,6 +23,8 @@
 		B53A1BB229C864C300ED8F84 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB129C864C300ED8F84 /* ResultViewController.swift */; };
 		B53A1BB529C864D800ED8F84 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB429C864D800ED8F84 /* ChatViewController.swift */; };
 		B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB629C8671800ED8F84 /* ToCartView.swift */; };
+		B53A1BB929C88E6100ED8F84 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB829C88E6100ED8F84 /* CartViewController.swift */; };
+		B53A1BBC29C88F4700ED8F84 /* CartViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BBB29C88F4700ED8F84 /* CartViewMain.swift */; };
 		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
 		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
@@ -57,6 +59,8 @@
 		B53A1BB129C864C300ED8F84 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		B53A1BB429C864D800ED8F84 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B53A1BB629C8671800ED8F84 /* ToCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCartView.swift; sourceTree = "<group>"; };
+		B53A1BB829C88E6100ED8F84 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		B53A1BBB29C88F4700ED8F84 /* CartViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewMain.swift; sourceTree = "<group>"; };
 		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
 		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,15 @@
 			path = EmptyTabView;
 			sourceTree = "<group>";
 		};
+		B53A1BBA29C88E7600ED8F84 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BB829C88E6100ED8F84 /* CartViewController.swift */,
+				B53A1BBB29C88F4700ED8F84 /* CartViewMain.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
 		B5952D5F29C0D71100DD8427 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +268,8 @@
 		B5BBDA7D29B9DDCB00F367AA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				B5BBDA8F29BB744800F367AA /* Controller */,
+				B5A9FD9129B9C7230040F0F4 /* OnboardingPageViewController.swift */,
+				B5A9FDA129B9C9870040F0F4 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -263,7 +277,10 @@
 		B5BBDA8029B9DDF700F367AA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				B5BBDA8D29BB743600F367AA /* Controller */,
+				B5BBDA7E29B9DDF500F367AA /* AuthViewController.swift */,
+				B5BBDA8129B9EA1200F367AA /* EmailCodeViewController.swift */,
+				B5BBDA8329BA1C3500F367AA /* CreatePasswordViewController.swift */,
+				B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -271,8 +288,10 @@
 		B5BBDA8929BB72CA00F367AA /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B53A1BB029C8634200ED8F84 /* TabBar */,
-				B5BBDA8E29BB743D00F367AA /* Controller */,
+				B5BBDA8729BB72C800F367AA /* HomeViewController.swift */,
+				B53A1B9829C6F20E00ED8F84 /* NewsBlock */,
+				B53A1B9729C6F20800ED8F84 /* CatalogBlock */,
+				B53A1B8E29C6DCE000ED8F84 /* Search */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -282,41 +301,12 @@
 			children = (
 				B53A1BB329C864C700ED8F84 /* EmptyTabView */,
 				B5BBDA7D29B9DDCB00F367AA /* Onboarding */,
+				B53A1BB029C8634200ED8F84 /* TabBar */,
 				B5BBDA8029B9DDF700F367AA /* Auth */,
 				B5BBDA8929BB72CA00F367AA /* Home */,
+				B53A1BBA29C88E7600ED8F84 /* Cart */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		B5BBDA8D29BB743600F367AA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5BBDA7E29B9DDF500F367AA /* AuthViewController.swift */,
-				B5BBDA8129B9EA1200F367AA /* EmailCodeViewController.swift */,
-				B5BBDA8329BA1C3500F367AA /* CreatePasswordViewController.swift */,
-				B5BBDA8529BB2B1000F367AA /* CreatePatientViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B5BBDA8E29BB743D00F367AA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5BBDA8729BB72C800F367AA /* HomeViewController.swift */,
-				B53A1B9829C6F20E00ED8F84 /* NewsBlock */,
-				B53A1B9729C6F20800ED8F84 /* CatalogBlock */,
-				B53A1B8E29C6DCE000ED8F84 /* Search */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B5BBDA8F29BB744800F367AA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5A9FD9129B9C7230040F0F4 /* OnboardingPageViewController.swift */,
-				B5A9FDA129B9C9870040F0F4 /* OnboardingViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		B5BC185029C1F33F00809824 /* Service */ = {
@@ -411,6 +401,7 @@
 				B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */,
 				B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
+				B53A1BBC29C88F4700ED8F84 /* CartViewMain.swift in Sources */,
 				B5BBDA7F29B9DDF500F367AA /* AuthViewController.swift in Sources */,
 				B53A1B9629C6EC3B00ED8F84 /* NewsCollectionReusableView.swift in Sources */,
 				B53A1B9029C6E87E00ED8F84 /* NewsCollectionViewCell.swift in Sources */,
@@ -423,6 +414,7 @@
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B53A1B9A29C6F37F00ED8F84 /* CategoryCollectionViewCell.swift in Sources */,
 				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,
+				B53A1BB929C88E6100ED8F84 /* CartViewController.swift in Sources */,
 				B53A1B9C29C6FAE800ED8F84 /* APIManager.swift in Sources */,
 				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,

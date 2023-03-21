@@ -86,7 +86,9 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .systemGray6
+        contentView.layer.borderColor = UIColor.systemGray6.cgColor
+        contentView.layer.borderWidth = 1
+        
         contentView.layer.cornerRadius = 12
         
         contentView.addSubview(contentStackView)

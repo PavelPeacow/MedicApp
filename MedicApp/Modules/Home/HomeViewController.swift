@@ -81,6 +81,8 @@ class HomeViewController: UIViewController {
     
     lazy var cartView: ToCartView = {
         let view = ToCartView()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCartView))
+        view.addGestureRecognizer(gesture)
         view.isHidden = true
         return view
     }()
@@ -305,11 +307,24 @@ extension HomeViewController: CatalogCollectionViewCellDelegate {
         
         if selectedItemsForBy.isEmpty {
             cartView.isHidden = true
+            collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             cartView.isHidden = false
+            collectionView.contentInset = .init(top: 0, left: 0, bottom: 120, right: 0)
         }
     }
     
+    
+}
+
+extension HomeViewController {
+    
+    @objc func didTapCartView() {
+        let vc = CartViewController()
+        vc.configure(selectedCatalogItems: selectedItemsForBy)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
