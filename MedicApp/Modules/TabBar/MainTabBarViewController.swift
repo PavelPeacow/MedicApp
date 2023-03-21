@@ -24,7 +24,7 @@ class MainTabBarViewController: UITabBarController {
         chat.tabBarItem.image = UIImage(named: "tab3")
         chat.tabBarItem.title = "Поддержка"
         
-        let profile = UINavigationController(rootViewController: ChatViewController())
+        let profile = UINavigationController(rootViewController: PacientCardViewController())
         profile.tabBarItem.image = UIImage(named: "tab4")
         profile.tabBarItem.title = "Профиль"
         

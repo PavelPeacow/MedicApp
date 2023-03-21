@@ -25,6 +25,9 @@
 		B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB629C8671800ED8F84 /* ToCartView.swift */; };
 		B53A1BB929C88E6100ED8F84 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BB829C88E6100ED8F84 /* CartViewController.swift */; };
 		B53A1BBC29C88F4700ED8F84 /* CartViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BBB29C88F4700ED8F84 /* CartViewMain.swift */; };
+		B53A1BBE29C9DCDE00ED8F84 /* PacientCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BBD29C9DCDE00ED8F84 /* PacientCardViewController.swift */; };
+		B53A1BC729C9E7F800ED8F84 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BC629C9E7F800ED8F84 /* OrderViewController.swift */; };
+		B53A1BC929C9F4E600ED8F84 /* InputTextfieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BC829C9F4E600ED8F84 /* InputTextfieldWithTitle.swift */; };
 		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
 		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
@@ -61,6 +64,9 @@
 		B53A1BB629C8671800ED8F84 /* ToCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCartView.swift; sourceTree = "<group>"; };
 		B53A1BB829C88E6100ED8F84 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B53A1BBB29C88F4700ED8F84 /* CartViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewMain.swift; sourceTree = "<group>"; };
+		B53A1BBD29C9DCDE00ED8F84 /* PacientCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacientCardViewController.swift; sourceTree = "<group>"; };
+		B53A1BC629C9E7F800ED8F84 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		B53A1BC829C9F4E600ED8F84 /* InputTextfieldWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfieldWithTitle.swift; sourceTree = "<group>"; };
 		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
 		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,9 +211,26 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		B53A1BBF29C9DCE800ED8F84 /* ProfilePacient */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BBD29C9DCDE00ED8F84 /* PacientCardViewController.swift */,
+			);
+			path = ProfilePacient;
+			sourceTree = "<group>";
+		};
+		B53A1BCA29CA005600ED8F84 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BC629C9E7F800ED8F84 /* OrderViewController.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		B5952D5F29C0D71100DD8427 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
+				B53A1BC829C9F4E600ED8F84 /* InputTextfieldWithTitle.swift */,
 				B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */,
 				B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */,
 				B53A1BA329C7047400ED8F84 /* UIImageViewURL.swift */,
@@ -304,7 +327,9 @@
 				B53A1BB029C8634200ED8F84 /* TabBar */,
 				B5BBDA8029B9DDF700F367AA /* Auth */,
 				B5BBDA8929BB72CA00F367AA /* Home */,
+				B53A1BBF29C9DCE800ED8F84 /* ProfilePacient */,
 				B53A1BBA29C88E7600ED8F84 /* Cart */,
+				B53A1BCA29CA005600ED8F84 /* Order */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -399,6 +424,7 @@
 			files = (
 				B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */,
 				B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */,
+				B53A1BC729C9E7F800ED8F84 /* OrderViewController.swift in Sources */,
 				B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
 				B53A1BBC29C88F4700ED8F84 /* CartViewMain.swift in Sources */,
@@ -411,6 +437,7 @@
 				B53A1BB229C864C300ED8F84 /* ResultViewController.swift in Sources */,
 				B5BBDA8629BB2B1000F367AA /* CreatePatientViewController.swift in Sources */,
 				B53A1B9429C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift in Sources */,
+				B53A1BC929C9F4E600ED8F84 /* InputTextfieldWithTitle.swift in Sources */,
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B53A1B9A29C6F37F00ED8F84 /* CategoryCollectionViewCell.swift in Sources */,
 				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,
@@ -418,6 +445,7 @@
 				B53A1B9C29C6FAE800ED8F84 /* APIManager.swift in Sources */,
 				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
+				B53A1BBE29C9DCDE00ED8F84 /* PacientCardViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
 				B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */,
 				B53A1B9229C6E88A00ED8F84 /* CatalogCollectionViewCell.swift in Sources */,
