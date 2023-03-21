@@ -20,7 +20,6 @@ class CartViewController: UIViewController {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .blue
         return scrollView
     }()
     
@@ -36,13 +35,6 @@ class CartViewController: UIViewController {
     
     lazy var contentView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var back: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -82,6 +74,7 @@ class CartViewController: UIViewController {
     lazy var priceTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -103,9 +96,8 @@ class CartViewController: UIViewController {
         scrollView.addSubview(contentView)
         scrollView.addSubview(catalogItemsStackView)
         
-        view.addSubview(back)
-        back.addSubview(cartTitle)
-        back.addSubview(bin)
+        view.addSubview(cartTitle)
+        view.addSubview(bin)
         
         view.addSubview(contentStackView)
         
@@ -147,7 +139,7 @@ extension CartViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: back.bottomAnchor, constant: 5),
+            scrollView.topAnchor.constraint(equalTo: cartTitle.bottomAnchor, constant: 5),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -40),
@@ -158,21 +150,14 @@ extension CartViewController {
             catalogItemsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
 
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 0),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 0),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: 0),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
 
-            back.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            back.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            back.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            back.heightAnchor.constraint(equalToConstant: 50),
+            cartTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            cartTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
-            cartTitle.topAnchor.constraint(equalTo: back.safeAreaLayoutGuide.topAnchor, constant: 15),
-            cartTitle.leadingAnchor.constraint(equalTo: back.leadingAnchor, constant: 20),
-            
-            bin.topAnchor.constraint(equalTo: back.safeAreaLayoutGuide.topAnchor, constant: 15),
-            bin.trailingAnchor.constraint(equalTo: back.trailingAnchor, constant: -20),
+            bin.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            bin.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             bin.heightAnchor.constraint(equalToConstant: 20),
             bin.widthAnchor.constraint(equalToConstant: 20),
             

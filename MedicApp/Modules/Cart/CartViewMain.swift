@@ -90,7 +90,7 @@ class CartViewMain: UIView {
     
     lazy var closeItem: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "xmark")?.withTintColor(.gray, renderingMode: .alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(systemName: "xmark")?.withTintColor(.gray, renderingMode: .alwaysOriginal), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -137,14 +137,14 @@ extension CartViewMain {
     func setConstraints() {
         NSLayoutConstraint.activate([
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             
-            closeItem.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            closeItem.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
             closeItem.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             closeItem.heightAnchor.constraint(equalToConstant: 20),
-            closeItem.heightAnchor.constraint(equalToConstant: 20),
+            closeItem.widthAnchor.constraint(equalToConstant: 20),
         ])
     }
     
