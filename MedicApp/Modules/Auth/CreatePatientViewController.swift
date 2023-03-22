@@ -124,6 +124,7 @@ class CreatePatientViewController: UIViewController {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .blue
+        btn.addTarget(self, action: #selector(didTapCreateBtn), for: .touchUpInside)
         btn.setTitle("Создать", for: .normal)
         return btn
     }()
@@ -163,9 +164,9 @@ extension CreatePatientViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.inputView == pciker || textField.inputView == datePicker {
-            return false // Return false to forbid text input when the picker is active.
+            return false
         } else {
-            return true // Return true to allow text input when the picker is not active.
+            return true
         }
     }
     
@@ -197,6 +198,10 @@ extension CreatePatientViewController: UIPickerViewDelegate {
 }
 
 private extension CreatePatientViewController {
+    
+    @objc func didTapCreateBtn() {
+        savePacientCard()
+    }
     
     @objc func didEnterDate(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()

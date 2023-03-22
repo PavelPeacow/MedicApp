@@ -236,6 +236,11 @@ class OrderViewController: UIViewController {
         setConstraints()
     }
     
+    func configure(analizCount: String, price: String) {
+        self.analizCount.text = "\(analizCount) анализ"
+        analizPrice.text = price
+    }
+    
 }
 
 extension OrderViewController {

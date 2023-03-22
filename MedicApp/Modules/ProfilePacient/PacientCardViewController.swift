@@ -117,6 +117,7 @@ class PacientCardViewController: UIViewController {
         let btn = UIButton()
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .blue
+        btn.addTarget(self, action: #selector(didTapSaveBtn), for: .touchUpInside)
         btn.setTitle("Сохранить", for: .normal)
         return btn
     }()
@@ -125,7 +126,7 @@ class PacientCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        getPacientCard()
+        getPacientCard()
         
         view.backgroundColor = .systemBackground
         
@@ -137,22 +138,23 @@ class PacientCardViewController: UIViewController {
         setConstraints()
     }
     
-//    func savePacientCard() {
-//        KeychainManager.default.add(key: "name", data: nameTextfield.text?.data(using: .utf8) ?? .init())
-//        KeychainManager.default.add(key: "secondName", data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
-//        KeychainManager.default.add(key: "surname", data: surnameTextfield.text?.data(using: .utf8) ?? .init())
-//        KeychainManager.default.add(key: "dateBirth", data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
-//        KeychainManager.default.add(key: "sex", data: sexTextfield.text?.data(using: .utf8) ?? .init())
-//    }
-//
-//    func getPacientCard() {
-//        nameTextfield.text = String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8)
-//        secondNameTextfield.text = String(data: KeychainManager.default.get(key: "secondName") ?? .init(), encoding: .utf8)
-//        surnameTextfield.text = String(data: KeychainManager.default.get(key: "surname") ?? .init(), encoding: .utf8)
-//        birthDateTextfield.text = String(data: KeychainManager.default.get(key: "dateBirth") ?? .init(), encoding: .utf8)
-//        sexTextfield.text = String(data: KeychainManager.default.get(key: "sex") ?? .init(), encoding: .utf8)
-//    }
-//
+    func savePacientCard() {
+        KeychainManager.default.add(key: "name", data: nameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "secondName", data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "surname", data: surnameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "dateBirth", data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: "sex", data: sexTextfield.text?.data(using: .utf8) ?? .init())
+    }
+
+    func getPacientCard() {
+        print(String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8))
+        nameTextfield.text = String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8)
+        secondNameTextfield.text = String(data: KeychainManager.default.get(key: "secondName") ?? .init(), encoding: .utf8)
+        surnameTextfield.text = String(data: KeychainManager.default.get(key: "surname") ?? .init(), encoding: .utf8)
+        birthDateTextfield.text = String(data: KeychainManager.default.get(key: "dateBirth") ?? .init(), encoding: .utf8)
+        sexTextfield.text = String(data: KeychainManager.default.get(key: "sex") ?? .init(), encoding: .utf8)
+    }
+
     
 }
 
@@ -160,9 +162,9 @@ extension PacientCardViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.inputView == pciker || textField.inputView == datePicker {
-            return false // Return false to forbid text input when the picker is active.
+            return false
         } else {
-            return true // Return true to allow text input when the picker is not active.
+            return true
         }
     }
     
@@ -195,6 +197,10 @@ extension PacientCardViewController: UIPickerViewDelegate {
 }
 
 private extension PacientCardViewController {
+    
+    @objc func didTapSaveBtn() {
+        savePacientCard()
+    }
     
     @objc func didEnterDate(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()

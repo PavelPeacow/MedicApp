@@ -52,6 +52,7 @@ class OnboardingPageViewController: UIPageViewController {
     }
     
     @objc func didTapSkipBtn() {
+        UserDefaults.standard.set(true, forKey: "DidSkipOnboarding")
         navigationController?.setViewControllers([AuthViewController()], animated: true)
     }
 

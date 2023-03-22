@@ -153,23 +153,22 @@ private extension AuthViewController {
         if validateEmail(emailTextfield.text ?? "") {
             
             KeychainManager.email = emailTextfield.text ?? ""
+            
+            let vc = EmailCodeViewController()
     
             if let savedEmail = KeychainManager.default.get(key: KeychainManager.keys.emailkey), let str = String(data: savedEmail, encoding: .utf8) {
                 if str == emailTextfield.text ?? "" {
                     print("ok!!!")
-                    let vc = EmailCodeViewController()
-                    navigationController?.pushViewController(vc, animated: true)
                 } else {
-                    let vc = EmailCodeViewController()
                     KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
-                    navigationController?.pushViewController(vc, animated: true)
+                    print("Create new email wtf??")
                 }
             } else {
-                let vc = EmailCodeViewController()
                 KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
-                navigationController?.pushViewController(vc, animated: true)
+                print("Create new email")
             }
             
+            navigationController?.pushViewController(vc, animated: true)
             
         } else {
             print("no")

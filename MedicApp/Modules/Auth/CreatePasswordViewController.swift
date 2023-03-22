@@ -32,7 +32,7 @@ class CreatePasswordViewController: UIViewController {
                     let password = String(data: savedPasswordData ?? .init(), encoding: .utf8) ?? ""
                     print(password)
                     if password == newValue {
-                        navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
+                        navigationController?.setViewControllers([MainTabBarViewController()], animated: true)
                     } else {
                         print("wrong")
                     }
@@ -42,7 +42,15 @@ class CreatePasswordViewController: UIViewController {
         }
     }
     
-    var state: PasswordState = .skipedPassword
+    var state: PasswordState = .skipedPassword {
+        willSet {
+            if newValue == .alreadyCreated {
+                passwordTitle.text = "Введите пароль"
+                passwordDescription.isHidden = true
+                skipBtn.isHidden = true
+            }
+        }
+    }
     
     private lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [passwordTitle, passwordDescription])

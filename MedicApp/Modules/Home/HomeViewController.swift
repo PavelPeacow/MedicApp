@@ -91,7 +91,6 @@ class HomeViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: SearchViewController())
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Искать анализы"
-        searchController.searchBar.delegate = self
         return searchController
     }()
     
@@ -140,40 +139,16 @@ class HomeViewController: UIViewController {
         }
         
         
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         
         setConstraints()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            trainlingConstraint = textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            textField.heightAnchor.constraint(equalToConstant: 55).isActive = true
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-            trainlingConstraint.isActive = true
-        }
     }
     
     func getCategories() -> [String] {
         Set(catalog.map { $0.category }).sorted(by: { $0 > $1 })
     }
     
-    
-}
-
-extension HomeViewController: UISearchBarDelegate {
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-      
-            self.trainlingConstraint.constant = -80
-        
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.trainlingConstraint.constant = -15
-    }
     
 }
 
@@ -333,7 +308,7 @@ extension HomeViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

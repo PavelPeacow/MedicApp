@@ -82,6 +82,7 @@ class CartViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("Перейти к оформлению заказа", for: .normal)
         btn.backgroundColor = .blue
+        btn.addTarget(self, action: #selector(didTapOrderBtn), for: .touchUpInside)
         btn.layer.cornerRadius = 10
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -120,6 +121,16 @@ class CartViewController: UIViewController {
             catalogItemsStackView.addArrangedSubview(view)
         }
         
+    }
+    
+}
+
+extension CartViewController {
+    
+    @objc func didTapOrderBtn() {
+        let vc = OrderViewController()
+        vc.configure(analizCount: String(catalogItems.count), price: String(catalogItems.reduce(into: 0, { $0 += Int($1.price) ?? 0 })))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

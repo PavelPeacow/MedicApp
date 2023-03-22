@@ -87,7 +87,7 @@ class EmailCodeViewController: UIViewController {
         btn.isHidden = true
         return btn
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,11 +97,8 @@ class EmailCodeViewController: UIViewController {
             print("yes")
         }
         
-
-        
-        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-
+        
         view.backgroundColor = .systemBackground
         
         view.addSubview(stackViewMain)
@@ -194,10 +191,10 @@ private extension EmailCodeViewController {
     @objc func updateTimer() {
         if counter > 0 {
             counter -= 1
-//            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+            //            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
         } else {
             counter = 15
-//            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+            //            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
             print("che")
             createNotification()
         }
@@ -211,7 +208,7 @@ private extension EmailCodeViewController {
         tryAgainLabel.isHidden = false
         print("again")
     }
-
+    
 }
 
 extension EmailCodeViewController: UITextFieldDelegate {
@@ -232,16 +229,14 @@ extension EmailCodeViewController: UITextFieldDelegate {
             let vc = CreatePasswordViewController()
             
             if let passwordData = KeychainManager.default.get(key: KeychainManager.keys.passwordKey) {
-                if let password = String(data: passwordData, encoding: .utf8) {
-                    print(password)
-                    if password == "skip" {
-                        vc.setPasswordState(state: .skipedPassword)
-                    } else {
-                        vc.setPasswordState(state: .alreadyCreated)
-                    }
-                    
-                } else {
+                let password = String(data: passwordData, encoding: .utf8)!
+                
+                print(password)
+                
+                if password == "skip" {
                     vc.setPasswordState(state: .skipedPassword)
+                } else {
+                    vc.setPasswordState(state: .alreadyCreated)
                 }
                 
             } else {
@@ -253,7 +248,7 @@ extension EmailCodeViewController: UITextFieldDelegate {
         }
         getNextTextfield(textField: sender)
     }
-
+    
 }
 
 private extension EmailCodeViewController {
