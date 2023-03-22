@@ -15,7 +15,9 @@ final class MedicAppTests: XCTestCase {
         var page2 = OnboardingViewController(title: "page2", description: "test22", image: UIImage(named: "test1")!, pageIndex: 1)
         var page3 = OnboardingViewController(title: "page3", description: "test33", image: UIImage(named: "test2")!, pageIndex: 2)
         
-
+        var btnTitle = "Пропустить"
+        
+        var didFinishOnboarding = false
 
         lazy var pages = [OnboardingViewController]()
         lazy var currentPageIndex = 0
@@ -32,7 +34,23 @@ final class MedicAppTests: XCTestCase {
             pages[currentPageIndex]
         }
 
-
+        func moveToNextPage() {
+            guard let index = pages.firstIndex(of: getCurrentPage()), index < pages.count - 1 else { return }
+            currentPageIndex = index + 1
+            if currentPageIndex == 2 {
+                btnTitle = "Завершить"
+            }
+        }
+        
+        func moveToPreviousPage() {
+            guard let index = pages.firstIndex(of: getCurrentPage()), index > 0 else { return }
+            currentPageIndex = index - 1
+        }
+        
+        func tapBtn() {
+            didFinishOnboarding = true
+        }
+        
     }
     
     /// Проверка извлечения при перемещении вправо
