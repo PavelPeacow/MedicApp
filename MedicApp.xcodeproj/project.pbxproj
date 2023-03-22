@@ -31,6 +31,7 @@
 		B53A1BCC29CAD4B500ED8F84 /* AdressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BCB29CAD4B500ED8F84 /* AdressViewController.swift */; };
 		B53A1BCE29CAE04000ED8F84 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BCD29CAE04000ED8F84 /* SelectDateViewController.swift */; };
 		B53A1BD029CAED7400ED8F84 /* FinalPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BCF29CAED7400ED8F84 /* FinalPaymentViewController.swift */; };
+		B53A1BD929CAFA1000ED8F84 /* MedicAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A1BD829CAFA1000ED8F84 /* MedicAppTests.swift */; };
 		B5952D5E29C0D70D00DD8427 /* InputTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */; };
 		B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */; };
 		B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9FD8D29B9C7230040F0F4 /* AppDelegate.swift */; };
@@ -47,6 +48,16 @@
 		B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8B29BB742500F367AA /* SearchViewController.swift */; };
 		B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC184E29C1F33200809824 /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B53A1BDA29CAFA1000ED8F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5A9FD8229B9C7230040F0F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5A9FD8929B9C7230040F0F4;
+			remoteInfo = MedicApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B53A1B8C29C6DCC600ED8F84 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -73,6 +84,8 @@
 		B53A1BCB29CAD4B500ED8F84 /* AdressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressViewController.swift; sourceTree = "<group>"; };
 		B53A1BCD29CAE04000ED8F84 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		B53A1BCF29CAED7400ED8F84 /* FinalPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalPaymentViewController.swift; sourceTree = "<group>"; };
+		B53A1BD629CAFA1000ED8F84 /* MedicAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53A1BD829CAFA1000ED8F84 /* MedicAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicAppTests.swift; sourceTree = "<group>"; };
 		B5952D5D29C0D70D00DD8427 /* InputTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextfield.swift; sourceTree = "<group>"; };
 		B5952D6029C0D9A100DD8427 /* EmailCodeTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeTextfield.swift; sourceTree = "<group>"; };
 		B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +106,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B53A1BD329CAFA1000ED8F84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5A9FD8729B9C7230040F0F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,8 +135,9 @@
 		B53A1B9729C6F20800ED8F84 /* CatalogBlock */ = {
 			isa = PBXGroup;
 			children = (
-				B53A1BAC29C71F5F00ED8F84 /* Cell */,
-				B53A1BA929C71F3F00ED8F84 /* Header */,
+				B53A1B9129C6E88A00ED8F84 /* CatalogCollectionViewCell.swift */,
+				B53A1B9329C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift */,
+				B53A1B9929C6F37F00ED8F84 /* CategoryCollectionViewCell.swift */,
 			);
 			path = CatalogBlock;
 			sourceTree = "<group>";
@@ -124,8 +145,8 @@
 		B53A1B9829C6F20E00ED8F84 /* NewsBlock */ = {
 			isa = PBXGroup;
 			children = (
-				B53A1BAD29C71F6400ED8F84 /* Cell */,
-				B53A1BAB29C71F4F00ED8F84 /* Header */,
+				B53A1B8F29C6E87E00ED8F84 /* NewsCollectionViewCell.swift */,
+				B53A1B9529C6EC3B00ED8F84 /* NewsCollectionReusableView.swift */,
 			);
 			path = NewsBlock;
 			sourceTree = "<group>";
@@ -148,47 +169,6 @@
 				B53A1BA729C71B5500ED8F84 /* CatalogItem.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		B53A1BA929C71F3F00ED8F84 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				B53A1B9329C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift */,
-				B53A1BAA29C71F4400ED8F84 /* Cell */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
-		B53A1BAA29C71F4400ED8F84 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				B53A1B9929C6F37F00ED8F84 /* CategoryCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		B53A1BAB29C71F4F00ED8F84 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				B53A1B9529C6EC3B00ED8F84 /* NewsCollectionReusableView.swift */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
-		B53A1BAC29C71F5F00ED8F84 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				B53A1B9129C6E88A00ED8F84 /* CatalogCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		B53A1BAD29C71F6400ED8F84 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				B53A1B8F29C6E87E00ED8F84 /* NewsCollectionViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		B53A1BB029C8634200ED8F84 /* TabBar */ = {
@@ -243,6 +223,14 @@
 			path = Payment;
 			sourceTree = "<group>";
 		};
+		B53A1BD729CAFA1000ED8F84 /* MedicAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B53A1BD829CAFA1000ED8F84 /* MedicAppTests.swift */,
+			);
+			path = MedicAppTests;
+			sourceTree = "<group>";
+		};
 		B5952D5F29C0D71100DD8427 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				B5A9FD8C29B9C7230040F0F4 /* MedicApp */,
+				B53A1BD729CAFA1000ED8F84 /* MedicAppTests */,
 				B5A9FD8B29B9C7230040F0F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -267,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */,
+				B53A1BD629CAFA1000ED8F84 /* MedicAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -370,6 +360,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B53A1BD529CAFA1000ED8F84 /* MedicAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B53A1BDC29CAFA1000ED8F84 /* Build configuration list for PBXNativeTarget "MedicAppTests" */;
+			buildPhases = (
+				B53A1BD229CAFA1000ED8F84 /* Sources */,
+				B53A1BD329CAFA1000ED8F84 /* Frameworks */,
+				B53A1BD429CAFA1000ED8F84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B53A1BDB29CAFA1000ED8F84 /* PBXTargetDependency */,
+			);
+			name = MedicAppTests;
+			productName = MedicAppTests;
+			productReference = B53A1BD629CAFA1000ED8F84 /* MedicAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B5A9FD8929B9C7230040F0F4 /* MedicApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5A9FD9E29B9C7250040F0F4 /* Build configuration list for PBXNativeTarget "MedicApp" */;
@@ -397,6 +405,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					B53A1BD529CAFA1000ED8F84 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = B5A9FD8929B9C7230040F0F4;
+					};
 					B5A9FD8929B9C7230040F0F4 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -416,11 +428,19 @@
 			projectRoot = "";
 			targets = (
 				B5A9FD8929B9C7230040F0F4 /* MedicApp */,
+				B53A1BD529CAFA1000ED8F84 /* MedicAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B53A1BD429CAFA1000ED8F84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5A9FD8829B9C7230040F0F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +455,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B53A1BD229CAFA1000ED8F84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53A1BD929CAFA1000ED8F84 /* MedicAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5A9FD8629B9C7230040F0F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +507,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B53A1BDB29CAFA1000ED8F84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5A9FD8929B9C7230040F0F4 /* MedicApp */;
+			targetProxy = B53A1BDA29CAFA1000ED8F84 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B5A9FD9829B9C7250040F0F4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -491,6 +527,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B53A1BDD29CAFA1000ED8F84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V352R4M2J4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.MedicAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedicApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedicApp";
+			};
+			name = Debug;
+		};
+		B53A1BDE29CAFA1000ED8F84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V352R4M2J4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.MedicAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedicApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedicApp";
+			};
+			name = Release;
+		};
 		B5A9FD9C29B9C7250040F0F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -666,6 +740,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B53A1BDC29CAFA1000ED8F84 /* Build configuration list for PBXNativeTarget "MedicAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53A1BDD29CAFA1000ED8F84 /* Debug */,
+				B53A1BDE29CAFA1000ED8F84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5A9FD8529B9C7230040F0F4 /* Build configuration list for PBXProject "MedicApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
