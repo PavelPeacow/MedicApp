@@ -8,12 +8,6 @@
 import Foundation
 import Security
 
-protocol KeychainManagerProtocol {
-    func add(key: String, data: Data) throws
-    func get(key: String) -> Data?
-    func delete(key: String) throws
-}
-
 /// Безопасное хранение с помощью шифрования
 class KeychainManager {
     

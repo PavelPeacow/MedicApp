@@ -242,12 +242,42 @@ class OrderViewController: UIViewController {
         
         scrollView.addSubview(itogWithBtnStackView)
         
+        getSavedAdress()
+        getSavedPerson()
+        
         setConstraints()
     }
     
     func configure(analizCount: String, price: String) {
         self.analizCount.text = "\(analizCount) анализ"
         analizPrice.text = price
+    }
+    
+    func getSavedAdress() {
+        let adressData = KeychainManager.default.get(key: KeychainManager.keys.adresskey)
+        let adressFlatNumberData = KeychainManager.default.get(key: KeychainManager.keys.flatKey)
+       
+        
+        if let adressData = adressData, let adressFlatNumberData = adressFlatNumberData {
+            let adress = String(data: adressData, encoding: .utf8)!
+            let flatNumber = String(data: adressFlatNumberData, encoding: .utf8)!
+            
+            addressTextfield.textfield.text = " \(adress), кв. \(flatNumber)"
+        }
+    }
+    
+    func getSavedPerson() {
+        let surnameData = KeychainManager.default.get(key: KeychainManager.keys.surnameKey)
+        let nameData = KeychainManager.default.get(key: KeychainManager.keys.nameKey)
+        let genderData = KeychainManager.default.get(key: KeychainManager.keys.sexKey)
+        
+        if let surnameData = surnameData, let nameData = nameData, let genderData = genderData {
+            let surname = String(data: surnameData, encoding: .utf8)!
+            let name = String(data: nameData, encoding: .utf8)!
+            let gender = String(data: genderData, encoding: .utf8)!
+            
+            pacientTextfield.textfield.text = "\(gender == "Мужской" ? "🧔" : "👩‍🦰") \(surname) \(name)"
+        }
     }
     
 }
@@ -271,7 +301,9 @@ extension OrderViewController: UITextFieldDelegate {
 extension OrderViewController {
     
     @objc func didTapOrderBtn() {
-        present(AdressViewController(), animated: true)
+        let vc = FinalPaymentViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.setViewControllers([vc], animated: true)
     }
     
 }
