@@ -87,6 +87,7 @@ final class MedicAppTests: XCTestCase {
         XCTAssert(pageController.btnTitle == "Завершить")
     }
     
+    ///Проверка на флаш
     func testOnboardingFinish() throws {
         let pageController = SamplePageViewController()
         
