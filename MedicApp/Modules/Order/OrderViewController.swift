@@ -39,9 +39,17 @@ class OrderViewController: UIViewController {
         return stackView
     }()
     
-    lazy var addressTextfield = InputTextfieldWithTitle(title: "Адрес", placeholder: "Адрес")
+    lazy var addressTextfield: InputTextfieldWithTitle = {
+        let adress = InputTextfieldWithTitle(title: "Адрес", placeholder: "Адрес")
+        adress.textfield.delegate = self
+        return adress
+    }()
     
-    lazy var timeTextfield = InputTextfieldWithTitle(title: "Дата и время", placeholder: "Дата и время")
+    lazy var timeTextfield: InputTextfieldWithTitle = {
+        let time = InputTextfieldWithTitle(title: "Дата и время", placeholder: "Дата и время")
+        time.textfield.delegate = self
+        return time
+    }()
     
     lazy var pacientStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pacientTextfield, addPacientBtn])
@@ -210,6 +218,7 @@ class OrderViewController: UIViewController {
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .blue
         btn.setTitle("Заказать", for: .normal)
+        btn.addTarget(self, action: #selector(didTapOrderBtn), for: .touchUpInside)
         return btn
     }()
 
@@ -239,6 +248,30 @@ class OrderViewController: UIViewController {
     func configure(analizCount: String, price: String) {
         self.analizCount.text = "\(analizCount) анализ"
         analizPrice.text = price
+    }
+    
+}
+
+extension OrderViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == addressTextfield.textfield {
+            textField.resignFirstResponder()
+            let vc = AdressViewController()
+            present(vc, animated: true)
+        } else if textField == timeTextfield.textfield {
+            textField.resignFirstResponder()
+            let vc = SelectDateViewController()
+            present(vc, animated: true)
+        }
+    }
+    
+}
+
+extension OrderViewController {
+    
+    @objc func didTapOrderBtn() {
+        present(AdressViewController(), animated: true)
     }
     
 }

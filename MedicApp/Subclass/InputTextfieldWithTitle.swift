@@ -28,7 +28,7 @@ class InputTextfieldWithTitle: UIView {
     
     lazy var textfield = InputTextfield()
     
-    init(title: String, placeholder: String) {
+    init(title: String? = nil, placeholder: String? = nil) {
         super.init(frame: .zero)
         
         label.text = title
