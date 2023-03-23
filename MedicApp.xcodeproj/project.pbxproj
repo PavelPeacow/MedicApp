@@ -47,6 +47,7 @@
 		B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8729BB72C800F367AA /* HomeViewController.swift */; };
 		B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8B29BB742500F367AA /* SearchViewController.swift */; };
 		B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC184E29C1F33200809824 /* KeychainManager.swift */; };
+		B5BC25C829CC8D31000F677F /* CatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		B5BBDA8729BB72C800F367AA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5BBDA8B29BB742500F367AA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B5BC184E29C1F33200809824 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				B53A1B9129C6E88A00ED8F84 /* CatalogCollectionViewCell.swift */,
 				B53A1B9329C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift */,
 				B53A1B9929C6F37F00ED8F84 /* CategoryCollectionViewCell.swift */,
+				B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */,
 			);
 			path = CatalogBlock;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B53A1BBE29C9DCDE00ED8F84 /* PacientCardViewController.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
+				B5BC25C829CC8D31000F677F /* CatalogDetailViewController.swift in Sources */,
 				B53A1BCE29CAE04000ED8F84 /* SelectDateViewController.swift in Sources */,
 				B53A1BB729C8671800ED8F84 /* ToCartView.swift in Sources */,
 				B53A1B9229C6E88A00ED8F84 /* CatalogCollectionViewCell.swift in Sources */,

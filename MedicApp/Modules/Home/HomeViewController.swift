@@ -239,12 +239,18 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         switch Sections.allCases[indexPath.section] {
             
         case .newsBlock:
             return
         case .catalog:
-            return
+            let item = filteredArrat[indexPath.row]
+            let vc = CatalogDetailViewController()
+            vc.delegate = self
+            let isContains = selectedItemsForBy.contains(where: { $0.id == item.id })
+            vc.configure(catalogItem: item, isAddItemToCart: isContains)
+            present(vc, animated: true)
         }
     }
     
@@ -289,6 +295,31 @@ extension HomeViewController: CatalogCollectionViewCellDelegate {
         }
     }
     
+}
+
+extension HomeViewController: CatalogDetailViewControllerDelegate {
+    
+    func didAddItemToCart(_ catalogItem: CatalogItem, isAddItemToCart: Bool) {
+        print(isAddItemToCart)
+        if isAddItemToCart {
+            selectedItemsForBy.append(catalogItem)
+            cartView.allPriceCount += Int(catalogItem.price) ?? 0
+        } else {
+            let removeIndex = selectedItemsForBy.firstIndex(where: { $0.name == catalogItem.name }) ?? 0
+            selectedItemsForBy.remove(at: removeIndex)
+            cartView.allPriceCount -= Int(catalogItem.price) ?? 0
+            print(removeIndex)
+            print(selectedItemsForBy)
+        }
+        collectionView.reloadData()
+        if selectedItemsForBy.isEmpty {
+            cartView.isHidden = true
+            collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        } else {
+            cartView.isHidden = false
+            collectionView.contentInset = .init(top: 0, left: 0, bottom: 120, right: 0)
+        }
+    }
     
 }
 
