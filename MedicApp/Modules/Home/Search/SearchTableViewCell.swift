@@ -16,7 +16,7 @@ class SearchTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .horizontal
-        stackView.spacing = 50
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -37,6 +37,7 @@ class SearchTableViewCell: UITableViewCell {
     
     lazy var searchItemPrice: UILabel = {
         let label = UILabel()
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
     
@@ -59,7 +60,7 @@ class SearchTableViewCell: UITableViewCell {
     
     func configure(description: String, price: String, date: String) {
         searchItemDescription.text = description
-        searchItemPrice.text = price
+        searchItemPrice.text = price + " ₽"
         searchItemDate.text = date
     }
     

@@ -155,6 +155,14 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
+        let vc = searchController.searchResultsController as! SearchViewController
+        
+        guard let text = searchController.searchBar.text, text.count > 0 else {
+            vc.filterCatalog(items: [])
+            return
+        }
+        
+        vc.filterCatalog(items: catalog.filter({ $0.name.lowercased().contains(text.lowercased()) }))
         
     }
     
