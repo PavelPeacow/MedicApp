@@ -11,6 +11,18 @@ class PacientCardViewController: UIViewController {
     
     var sexes = ["Мужской", "Женский"]
     
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    lazy var scrollContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var stackViewDescription: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [cardDescription, cardSomeDescription])
         stackView.alignment = .fill
@@ -37,6 +49,9 @@ class PacientCardViewController: UIViewController {
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
+        image.addGestureRecognizer(gesture)
         return image
     }()
     
@@ -130,10 +145,13 @@ class PacientCardViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        view.addSubview(cardTitle)
-        view.addSubview(cardImage)
-        view.addSubview(stackViewDescription)
-        view.addSubview(stackViewInput)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContainer)
+        
+        scrollContainer.addSubview(cardTitle)
+        scrollContainer.addSubview(cardImage)
+        scrollContainer.addSubview(stackViewDescription)
+        scrollContainer.addSubview(stackViewInput)
         
         setConstraints()
     }
@@ -196,7 +214,29 @@ extension PacientCardViewController: UIPickerViewDelegate {
     
 }
 
+extension PacientCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            return
+        }
+        
+        cardImage.image = selectedImage
+        
+        dismiss(animated: true)
+    }
+    
+}
+
 private extension PacientCardViewController {
+    
+    @objc func didTapImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true)
+    }
     
     @objc func didTapSaveBtn() {
         savePacientCard()
@@ -215,8 +255,19 @@ extension PacientCardViewController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: stackViewInput.bottomAnchor, constant: 25),
             
-            cardTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            scrollContainer.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            scrollContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            scrollContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            scrollContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            scrollContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            cardTitle.topAnchor.constraint(equalTo: scrollContainer.safeAreaLayoutGuide.topAnchor, constant: 5),
             cardTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             cardTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
