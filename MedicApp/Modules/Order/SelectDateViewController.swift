@@ -15,7 +15,7 @@ class TimeCollectioViewCell: UICollectionViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .gray
         return label
     }()
     
@@ -25,7 +25,7 @@ class TimeCollectioViewCell: UICollectionViewCell {
         contentView.addSubview(timeLabel)
         
         contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .systemGray6
         
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -43,12 +43,31 @@ class TimeCollectioViewCell: UICollectionViewCell {
         timeLabel.text = time
     }
     
+    func setState(isSelected: Bool) {
+        if isSelected {
+            timeLabel.textColor = .white
+            contentView.backgroundColor = .blue
+        } else {
+            timeLabel.textColor = .gray
+            contentView.backgroundColor = .systemGray6
+        }
+    }
+    
+}
+
+
+protocol SelectDateViewControllerDelegate {
+    func didTapConfirmDateBtn(_ date: String, time: String)
 }
 
 
 class SelectDateViewController: UIViewController {
     
     var time = ["10:00", "13:00", "14:00", "15:00", "16:00", "18:00","19:00",]
+    
+    var delegate: SelectDateViewControllerDelegate?
+    
+    var selectedTimeCell: TimeCollectioViewCell?
     
     lazy var dateStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [dateTitle, selectDate, timeTitle, collectioView, confirmBtn])
@@ -69,7 +88,17 @@ class SelectDateViewController: UIViewController {
     
     lazy var selectDate: InputTextfieldWithTitle = {
         let date = InputTextfieldWithTitle(title: "Выберите дату")
+        date.textfield.delegate = self
+        date.textfield.inputView = datePicker
         return date
+    }()
+    
+    lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .date
+        picker.addTarget(self, action: #selector(didSelectDate), for: .valueChanged)
+        return picker
     }()
     
     lazy var timeTitle: UILabel = {
@@ -134,13 +163,51 @@ class SelectDateViewController: UIViewController {
     }
     
 
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func setLayout() {
+        view.layoutIfNeeded()
+        selectedTimeCell = collectioView.cellForItem(at: IndexPath(item: 0, section: 0)) as? TimeCollectioViewCell
+        selectedTimeCell?.setState(isSelected: true)
+    }
+    
+    
+    func formateDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy MM dd"
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
+    }
+    
 }
 
 extension SelectDateViewController {
     
+    @objc func didSelectDate(_ sender: UIDatePicker) {
+        let date = sender.date
+        selectDate.textfield.text = formateDate(date)
+    }
+    
     @objc func didTapConfirmBtn() {
+        let dateStr = selectDate.textfield.text ?? ""
+        let time = selectedTimeCell?.timeLabel.text ?? ""
+        
+        delegate?.didTapConfirmDateBtn(dateStr, time: time)
         dismiss(animated: true)
+    }
+    
+}
+
+extension SelectDateViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.inputView == datePicker {
+            return false
+        } else {
+            return true
+        }
     }
     
 }
@@ -163,5 +230,16 @@ extension SelectDateViewController: UICollectionViewDataSource {
 }
 
 extension SelectDateViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! TimeCollectioViewCell
+        
+        guard cell != selectedTimeCell else {
+            return
+        }
+        selectedTimeCell?.setState(isSelected: false)
+        selectedTimeCell = cell
+        selectedTimeCell?.setState(isSelected: true)
+    }
     
 }

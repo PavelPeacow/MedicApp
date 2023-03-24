@@ -292,8 +292,18 @@ extension OrderViewController: UITextFieldDelegate {
         } else if textField == timeTextfield.textfield {
             textField.resignFirstResponder()
             let vc = SelectDateViewController()
+            vc.delegate = self
+            vc.setLayout()
             present(vc, animated: true)
         }
+    }
+    
+}
+
+extension OrderViewController: SelectDateViewControllerDelegate {
+    
+    func didTapConfirmDateBtn(_ date: String, time: String) {
+        timeTextfield.textfield.text = "\(date) \(time)"
     }
     
 }
