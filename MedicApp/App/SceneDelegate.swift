@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             vc = OnboardingPageViewController()
         }
         
-        let nav = UINavigationController(rootViewController: OnboardingPageViewController())
+        let nav = UINavigationController(rootViewController: HomeViewController())
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = nav

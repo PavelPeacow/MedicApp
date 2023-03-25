@@ -11,27 +11,27 @@
     "name": "Результаты ПЦР-теста на COVID-19 за 3 часа",
     "description": "Теперь результат ПЦР-теста на COVID-19 можно получить уже через 3 часа!",
     "price": "1400",
-    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com%20(4).png"
+    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com (4).png"
   },
   {
     "id": 4,
     "name": "Биохимический анализ крови",
     "description": "До 30 ноября выполните комплекс исследований со скидкой 15%",
     "price": "2300",
-    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com%20(2).png"
+    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com (2).png"
   },
   {
     "id": 5,
     "name": "Для людей с большим сердцем",
     "description": "+300 бонусных рублей по нашей программе лояльности «Здоровый кэшбэк» всем, кто сдаст кровь на типирование",
     "price": "1",
-    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com%20(5).png"
+    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com (5).png"
   },
   {
     "id": 6,
     "name": "Более 60 аллерготестов",
     "description": "В нашем каталоге появились новые исследования для диагностики аллергии («Алкор Био», РФ).",
     "price": "900",
-    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com%20(6).png"
+    "image": "https://medic.madskill.ru/filemanager/uploads/pngwing.com (6).png"
   }
 ]

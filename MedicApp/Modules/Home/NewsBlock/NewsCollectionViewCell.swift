@@ -74,7 +74,7 @@ class NewsCollectionViewCell: UICollectionViewCell {
         newsDescription.text = news.description
         newsPrice.text = news.price
         newsPrice.text?.append(" ₽")
-        guard let url = URL(string: news.image) else { return }
+        guard let url = URL(string: news.image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else { return }
         newsImage.loadImage(imageURL: url)
     }
     

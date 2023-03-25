@@ -221,7 +221,7 @@ extension PacientCardViewController: UIImagePickerControllerDelegate, UINavigati
             return
         }
         
-        cardImage.image = selectedImage
+        cardImage.image = UIImage(named: "test")
         
         dismiss(animated: true)
     }
