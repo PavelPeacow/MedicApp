@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheet
 
 protocol CatalogDetailViewControllerDelegate {
     func didAddItemToCart(_ catalogItem: CatalogItem, isAddItemToCart: Bool)
@@ -19,7 +20,7 @@ class CatalogDetailViewController: UIViewController {
     
     var delegate: CatalogDetailViewControllerDelegate?
     
-    lazy var scrollView: UIScrollView = {
+    lazy var scrollViewContent: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
@@ -195,28 +196,28 @@ class CatalogDetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
 
-        view.addSubview(scrollView)
-        scrollView.addSubview(scrollContainer)
+        view.addSubview(scrollViewContent)
+        scrollViewContent.addSubview(scrollContainer)
         
-        scrollView.addSubview(catalogDetailTitle)
-        scrollView.addSubview(decsriptionStackView)
-        scrollView.addSubview(preparationStackView)
-        scrollView.addSubview(itogStackView)
+        scrollViewContent.addSubview(catalogDetailTitle)
+        scrollViewContent.addSubview(decsriptionStackView)
+        scrollViewContent.addSubview(preparationStackView)
+        scrollViewContent.addSubview(itogStackView)
         
-        scrollView.addSubview(addBtn)
+        scrollViewContent.addSubview(addBtn)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: addBtn.bottomAnchor, constant: 25),
+            scrollViewContent.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollViewContent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollViewContent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollViewContent.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollViewContent.contentLayoutGuide.bottomAnchor.constraint(equalTo: addBtn.bottomAnchor, constant: 25),
             
-            scrollContainer.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            scrollContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            scrollContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            scrollContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            scrollContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            scrollContainer.topAnchor.constraint(equalTo: scrollViewContent.contentLayoutGuide.topAnchor),
+            scrollContainer.leadingAnchor.constraint(equalTo: scrollViewContent.leadingAnchor),
+            scrollContainer.trailingAnchor.constraint(equalTo: scrollViewContent.trailingAnchor),
+            scrollContainer.heightAnchor.constraint(equalTo: scrollViewContent.heightAnchor),
+            scrollContainer.widthAnchor.constraint(equalTo: scrollViewContent.widthAnchor),
             
             catalogDetailTitle.topAnchor.constraint(equalTo: scrollContainer.safeAreaLayoutGuide.topAnchor, constant: 24),
             catalogDetailTitle.leadingAnchor.constraint(equalTo: scrollContainer.leadingAnchor, constant: 20),

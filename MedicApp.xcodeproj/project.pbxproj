@@ -48,6 +48,8 @@
 		B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBDA8B29BB742500F367AA /* SearchViewController.swift */; };
 		B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC184E29C1F33200809824 /* KeychainManager.swift */; };
 		B5BC25C829CC8D31000F677F /* CatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */; };
+		B5BC25D229CED316000F677F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = B5BC25D129CED316000F677F /* BottomSheet */; };
+		B5BC25D429CEE2E2000F677F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,7 @@
 		B5BC184E29C1F33200809824 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDetailViewController.swift; sourceTree = "<group>"; };
 		B5BC25C929CD9A72000F677F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BC25D229CED316000F677F /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B53A1BCF29CAED7400ED8F84 /* FinalPaymentViewController.swift */,
+				B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -396,6 +401,9 @@
 			dependencies = (
 			);
 			name = MedicApp;
+			packageProductDependencies = (
+				B5BC25D129CED316000F677F /* BottomSheet */,
+			);
 			productName = MedicApp;
 			productReference = B5A9FD8A29B9C7230040F0F4 /* MedicApp.app */;
 			productType = "com.apple.product-type.application";
@@ -428,6 +436,9 @@
 				Base,
 			);
 			mainGroup = B5A9FD8129B9C7230040F0F4;
+			packageReferences = (
+				B5BC25D029CED316000F677F /* XCRemoteSwiftPackageReference "BottomSheet" */,
+			);
 			productRefGroup = B5A9FD8B29B9C7230040F0F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -481,6 +492,7 @@
 				B5BBDA7F29B9DDF500F367AA /* AuthViewController.swift in Sources */,
 				B53A1B9629C6EC3B00ED8F84 /* NewsCollectionReusableView.swift in Sources */,
 				B53A1B9029C6E87E00ED8F84 /* NewsCollectionViewCell.swift in Sources */,
+				B5BC25D429CEE2E2000F677F /* LoadingViewController.swift in Sources */,
 				B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */,
 				B53A1BD029CAED7400ED8F84 /* FinalPaymentViewController.swift in Sources */,
 				B53A1BA829C71B5500ED8F84 /* CatalogItem.swift in Sources */,
@@ -782,6 +794,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5BC25D029CED316000F677F /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joomcode/BottomSheet";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5BC25D129CED316000F677F /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5BC25D029CED316000F677F /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B5A9FD8229B9C7230040F0F4 /* Project object */;
 }

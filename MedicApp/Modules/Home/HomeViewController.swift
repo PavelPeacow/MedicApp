@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheet
 
 enum Sections: CaseIterable {
     case newsBlock
@@ -255,10 +256,12 @@ extension HomeViewController: UICollectionViewDelegate {
         case .catalog:
             let item = filteredArrat[indexPath.row]
             let vc = CatalogDetailViewController()
+            vc.preferredContentSize = .init(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 150)
             vc.delegate = self
             let isContains = selectedItemsForBy.contains(where: { $0.id == item.id })
             vc.configure(catalogItem: item, isAddItemToCart: isContains)
-            present(vc, animated: true)
+//            present(vc, animated: true)
+            presentBottomSheet(viewController: vc, configuration: .init(cornerRadius: 12, pullBarConfiguration: .hidden, shadowConfiguration: .default))
         }
     }
     

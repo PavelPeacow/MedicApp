@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol AdressViewControllerDelegate {
+    func didEnterAdress(_ adress: String)
+}
+
 class AdressViewController: UIViewController {
     
     var isSaveOn = false
+    
+    var delegate: AdressViewControllerDelegate?
     
     lazy var adressStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [addressAndBtnStackView, adress, coordionateStackView,
@@ -139,8 +145,11 @@ class AdressViewController: UIViewController {
 extension AdressViewController {
     
     @objc func didTapConfirmBtn() {
+        let adress = "\(adress.textfield.text!), кв. \(flat.textfield.text!)"
+        delegate?.didEnterAdress(adress)
+        
         if isSaveOn {
-            KeychainManager.default.saveAdress(adress: adress.textfield.text ?? "",
+            KeychainManager.default.saveAdress(adress: self.adress.textfield.text ?? "",
                                                dolgota: dolgota.textfield.text ?? "",
                                                shirota: shitota.textfield.text ?? "",
                                                visota: visota.textfield.text ?? "",

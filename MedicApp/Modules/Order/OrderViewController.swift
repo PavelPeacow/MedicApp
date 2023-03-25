@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheet
 
 class OrderViewController: UIViewController {
     
@@ -288,14 +289,25 @@ extension OrderViewController: UITextFieldDelegate {
         if textField == addressTextfield.textfield {
             textField.resignFirstResponder()
             let vc = AdressViewController()
-            present(vc, animated: true)
+            vc.delegate = self
+            vc.preferredContentSize = .init(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width + 200)
+            presentBottomSheet(viewController: vc, configuration: .init(cornerRadius: 12, pullBarConfiguration: .hidden, shadowConfiguration: .default))
         } else if textField == timeTextfield.textfield {
             textField.resignFirstResponder()
             let vc = SelectDateViewController()
             vc.delegate = self
             vc.setLayout()
-            present(vc, animated: true)
+            vc.preferredContentSize = .init(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width + 200)
+            presentBottomSheet(viewController: vc, configuration: .init(cornerRadius: 12, pullBarConfiguration: .hidden, shadowConfiguration: .default))
         }
+    }
+    
+}
+
+extension OrderViewController: AdressViewControllerDelegate {
+    
+    func didEnterAdress(_ adress: String) {
+        addressTextfield.textfield.text = adress
     }
     
 }
@@ -311,7 +323,7 @@ extension OrderViewController: SelectDateViewControllerDelegate {
 extension OrderViewController {
     
     @objc func didTapOrderBtn() {
-        let vc = FinalPaymentViewController()
+        let vc = LoadingViewController()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.setViewControllers([vc], animated: true)
     }
