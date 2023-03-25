@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import AVFoundation
+import MobileCoreServices
 
 class PacientCardViewController: UIViewController {
     
     var sexes = ["Мужской", "Женский"]
     
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
+        
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +52,7 @@ class PacientCardViewController: UIViewController {
         image.image = UIImage(named: "imageProfile")
         image.layer.cornerRadius = 60
         image.clipsToBounds = true
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         image.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
@@ -173,6 +178,12 @@ class PacientCardViewController: UIViewController {
         sexTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.sexKey) ?? .init(), encoding: .utf8)
     }
 
+    func loopVideo(videoPlayer: AVPlayer) {
+      NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { notification in
+        videoPlayer.seek(to: .zero)
+        videoPlayer.play()
+      }
+    }
     
 }
 
@@ -217,13 +228,31 @@ extension PacientCardViewController: UIPickerViewDelegate {
 extension PacientCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let selectedImage = info[.originalImage] as? UIImage else {
-            return
+        if let videoURL = info[.mediaURL] as? URL {
+            print(videoURL)
+            let assets = AVAsset(url: videoURL)
+            let playerItem = AVPlayerItem(asset: assets)
+            player = AVPlayer(playerItem: playerItem)
+
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = cardImage.bounds
+            playerLayer?.videoGravity = .resizeAspectFill
+            cardImage.layer.addSublayer(playerLayer ?? .init())
+
+            player?.isMuted = true
+            
+            loopVideo(videoPlayer: player!)
         }
         
-        cardImage.image = UIImage(named: "test")
+        if let selectedImage = info[.originalImage] as? UIImage  {
+            cardImage.image = selectedImage
+            player?.pause()
+            playerLayer?.removeFromSuperlayer()
+        }
         
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            self.player?.play()
+        }
     }
     
 }
@@ -232,9 +261,13 @@ private extension PacientCardViewController {
     
     @objc func didTapImage() {
         let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
         imagePicker.sourceType = .camera
+        imagePicker.delegate = self
+        imagePicker.videoMaximumDuration = 2.0
+        imagePicker.videoQuality = .typeHigh
+        imagePicker.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
+        
+       
         present(imagePicker, animated: true)
     }
     

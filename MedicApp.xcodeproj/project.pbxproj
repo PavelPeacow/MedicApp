@@ -714,6 +714,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = KMedic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Разрешите доступ к камере устройства!";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Разрешите доступ к микрофону!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -745,6 +746,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = KMedic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Разрешите доступ к камере устройства!";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Разрешите доступ к микрофону!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
