@@ -157,20 +157,20 @@ class PacientCardViewController: UIViewController {
     }
     
     func savePacientCard() {
-        KeychainManager.default.add(key: "name", data: nameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: "secondName", data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: "surname", data: surnameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: "dateBirth", data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: "sex", data: sexTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: KeychainManager.keys.nameKey, data: nameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: KeychainManager.keys.secondKey, data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: KeychainManager.keys.surnameKey, data: surnameTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: KeychainManager.keys.birthKey, data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
+        KeychainManager.default.add(key: KeychainManager.keys.sexKey, data: sexTextfield.text?.data(using: .utf8) ?? .init())
     }
 
     func getPacientCard() {
-        print(String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8))
-        nameTextfield.text = String(data: KeychainManager.default.get(key: "name") ?? .init(), encoding: .utf8)
-        secondNameTextfield.text = String(data: KeychainManager.default.get(key: "secondName") ?? .init(), encoding: .utf8)
-        surnameTextfield.text = String(data: KeychainManager.default.get(key: "surname") ?? .init(), encoding: .utf8)
-        birthDateTextfield.text = String(data: KeychainManager.default.get(key: "dateBirth") ?? .init(), encoding: .utf8)
-        sexTextfield.text = String(data: KeychainManager.default.get(key: "sex") ?? .init(), encoding: .utf8)
+        print(String(data: KeychainManager.default.get(key: KeychainManager.keys.nameKey) ?? .init(), encoding: .utf8))
+        nameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.nameKey) ?? .init(), encoding: .utf8)
+        secondNameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.secondKey) ?? .init(), encoding: .utf8)
+        surnameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.surnameKey) ?? .init(), encoding: .utf8)
+        birthDateTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.birthKey) ?? .init(), encoding: .utf8)
+        sexTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.sexKey) ?? .init(), encoding: .utf8)
     }
 
     

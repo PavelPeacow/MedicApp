@@ -109,6 +109,8 @@ class AdressViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getSavedAdress()
 
         saveName.isHidden = true
         
@@ -120,7 +122,17 @@ class AdressViewController: UIViewController {
     }
     
 
-
+    func getSavedAdress() {
+        adress.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.adresskey) ?? .init(), encoding: .utf8)
+        dolgota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.dolgotaKey) ?? .init(), encoding: .utf8)
+        shitota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.shirotaKey) ?? .init(), encoding: .utf8)
+        visota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.visotaKey) ?? .init(), encoding: .utf8)
+        flat.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.flatKey) ?? .init(), encoding: .utf8)
+        podezd.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.podezdKey) ?? .init(), encoding: .utf8)
+        etaj.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.etajKey) ?? .init(), encoding: .utf8)
+        domofon.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.domofonKey) ?? .init(), encoding: .utf8)
+    }
+    
 
 }
 

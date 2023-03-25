@@ -17,16 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         var vc: UIViewController
         
-//        if UserDefaults.standard.bool(forKey: "DidSkipOnboarding") {
-//            vc = AuthViewController()
-//        } else {
-//            vc = OnboardingPageViewController()
-//        }
+        if UserDefaults.standard.bool(forKey: "DidSkipOnboarding") {
+            vc = AuthViewController()
+        } else {
+            vc = OnboardingPageViewController()
+        }
         
-        let nav = UINavigationController(rootViewController: MainTabBarViewController())
+        let nav = UINavigationController(rootViewController: OnboardingPageViewController())
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarViewController()
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
         
     }
