@@ -142,19 +142,19 @@ class CreatePatientViewController: UIViewController {
     }
     
     func savePacientCard() {
-        KeychainManager.default.add(key: KeychainManager.keys.nameKey, data: nameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: KeychainManager.keys.secondKey, data: secondNameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: KeychainManager.keys.surnameKey, data: surnameTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: KeychainManager.keys.birthKey, data: birthDateTextfield.text?.data(using: .utf8) ?? .init())
-        KeychainManager.default.add(key: KeychainManager.keys.sexKey, data: sexTextfield.text?.data(using: .utf8) ?? .init())
+        UserDefaults.standard.setValue(nameTextfield.text!, forKey: KeychainManager.keys.nameKey)
+        UserDefaults.standard.setValue(secondNameTextfield.text!, forKey: KeychainManager.keys.secondKey)
+        UserDefaults.standard.setValue(surnameTextfield.text!, forKey: KeychainManager.keys.surnameKey)
+        UserDefaults.standard.setValue(birthDateTextfield.text!, forKey: KeychainManager.keys.birthKey)
+        UserDefaults.standard.setValue(sexTextfield.text!, forKey: KeychainManager.keys.sexKey)
     }
-    
+
     func getPacientCard() {
-        nameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.nameKey) ?? .init(), encoding: .utf8)
-        secondNameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.secondKey) ?? .init(), encoding: .utf8)
-        surnameTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.surnameKey) ?? .init(), encoding: .utf8)
-        birthDateTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.birthKey) ?? .init(), encoding: .utf8)
-        sexTextfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.sexKey) ?? .init(), encoding: .utf8)
+        nameTextfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.nameKey)
+        secondNameTextfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.secondKey)
+        surnameTextfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.surnameKey)
+        birthDateTextfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.birthKey)
+        sexTextfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.sexKey)
     }
     
     

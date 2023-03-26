@@ -228,9 +228,7 @@ extension EmailCodeViewController: UITextFieldDelegate {
             
             let vc = CreatePasswordViewController()
             
-            if let passwordData = KeychainManager.default.get(key: KeychainManager.keys.passwordKey) {
-                let password = String(data: passwordData, encoding: .utf8)!
-                
+            if let password = UserDefaults.standard.string(forKey: KeychainManager.keys.passwordKey) {
                 print(password)
                 
                 if password == "skip" {

@@ -28,8 +28,7 @@ class CreatePasswordViewController: UIViewController {
                     navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
                     
                 case .alreadyCreated:
-                    let savedPasswordData = KeychainManager.default.get(key: KeychainManager.keys.passwordKey)
-                    let password = String(data: savedPasswordData ?? .init(), encoding: .utf8) ?? ""
+                    let password = UserDefaults.standard.string(forKey: KeychainManager.keys.passwordKey)
                     print(password)
                     if password == newValue {
                         navigationController?.setViewControllers([MainTabBarViewController()], animated: true)
@@ -212,7 +211,7 @@ class CreatePasswordViewController: UIViewController {
     }
     
     private func savePasswordToKeyChain(password: String) {
-        KeychainManager.default.add(key: KeychainManager.keys.passwordKey, data: password.data(using: .utf8) ?? Data())
+        UserDefaults.standard.set(password, forKey: KeychainManager.keys.passwordKey)
     }
     
 }
@@ -251,7 +250,7 @@ private extension CreatePasswordViewController {
     }
     
     @objc func didTapSkipBtn() {
-        KeychainManager.default.add(key: KeychainManager.keys.passwordKey, data: "skip".data(using: .utf8) ?? Data())
+        UserDefaults.standard.setValue("skip", forKey: KeychainManager.keys.passwordKey)
         navigationController?.setViewControllers([CreatePatientViewController()], animated: true)
     }
     

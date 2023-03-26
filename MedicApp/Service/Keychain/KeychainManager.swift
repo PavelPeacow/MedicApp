@@ -35,78 +35,23 @@ class KeychainManager {
         static let nameAdressKey = "\(email)-nameAdressKey"
     }
     
-    func saveAdress(adress: String, dolgota: String, shirota: String,
-                    visota: String, flat: String, podezd: String,
-                    etaj: String, domofon: String, nameAdress: String) {
-        
-        add(key: KeychainManager.keys.adresskey, data: adress.data(using: .utf8)!)
-        add(key: KeychainManager.keys.dolgotaKey, data: dolgota.data(using: .utf8)!)
-        add(key: KeychainManager.keys.shirotaKey, data: shirota.data(using: .utf8)!)
-        add(key: KeychainManager.keys.visotaKey, data: visota.data(using: .utf8)!)
-        add(key: KeychainManager.keys.flatKey, data: flat.data(using: .utf8)!)
-        add(key: KeychainManager.keys.podezdKey, data: podezd.data(using: .utf8)!)
-        add(key: KeychainManager.keys.etajKey, data: etaj.data(using: .utf8)!)
-        add(key: KeychainManager.keys.domofonKey, data: domofon.data(using: .utf8)!)
-        add(key: KeychainManager.keys.nameAdressKey, data: nameAdress.data(using: .utf8)!)
-        
-    }
+//    func saveAdress(adress: String, dolgota: String, shirota: String,
+//                    visota: String, flat: String, podezd: String,
+//                    etaj: String, domofon: String, nameAdress: String) {
+//        
+//        add(key: KeychainManager.keys.adresskey, data: adress.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.dolgotaKey, data: dolgota.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.shirotaKey, data: shirota.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.visotaKey, data: visota.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.flatKey, data: flat.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.podezdKey, data: podezd.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.etajKey, data: etaj.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.domofonKey, data: domofon.data(using: .utf8)!)
+//        add(key: KeychainManager.keys.nameAdressKey, data: nameAdress.data(using: .utf8)!)
+//        
+//    }
     
-    func add(key: String, data: Data) {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: key,
-            kSecAttrAccount as String: "pavel.MedicApp.com",
-            kSecValueData as String: data
-        ] as CFDictionary
-        
-        let status = SecItemAdd(query, nil)
-        
-        guard status != errSecDuplicateItem else {
-           print("DuplicateFinded")
-            delete(key: key)
-            add(key: key, data: data)
-            print("Remove Duplicate and save again")
-            return
-        }
-        
-        guard status == errSecSuccess else {
-            print("SomeError")
-            return
-        }
-        
-        print("added")
-    }
-    
-    func get(key: String) -> Data? {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: key,
-            kSecAttrAccount as String: "pavel.MedicApp.com",
-            kSecReturnData as String: true
-        ] as CFDictionary
-        
-        var result: AnyObject?
-        let _ = SecItemCopyMatching(query, &result)
-        
-        return result as? Data
-    }
-    
-    func delete(key: String) {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: key,
-            kSecAttrAccount as String: "pavel.MedicApp.com",
-        ] as CFDictionary
-        
-        let status = SecItemDelete(query)
-        
-        guard status == errSecSuccess else {
-            print("No such item")
-            return
-        }
-        
-        print("deleted")
-    }
+ 
     
     
 }

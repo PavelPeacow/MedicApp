@@ -129,14 +129,14 @@ class AdressViewController: UIViewController {
     
 
     func getSavedAdress() {
-        adress.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.adresskey) ?? .init(), encoding: .utf8)
-        dolgota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.dolgotaKey) ?? .init(), encoding: .utf8)
-        shitota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.shirotaKey) ?? .init(), encoding: .utf8)
-        visota.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.visotaKey) ?? .init(), encoding: .utf8)
-        flat.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.flatKey) ?? .init(), encoding: .utf8)
-        podezd.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.podezdKey) ?? .init(), encoding: .utf8)
-        etaj.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.etajKey) ?? .init(), encoding: .utf8)
-        domofon.textfield.text = String(data: KeychainManager.default.get(key: KeychainManager.keys.domofonKey) ?? .init(), encoding: .utf8)
+        adress.textfield.text = UserDefaults.standard.string(forKey: KeychainManager.keys.adresskey)
+        dolgota.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.dolgotaKey)
+        shitota.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.shirotaKey)
+        visota.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.visotaKey)
+        flat.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.flatKey)
+        podezd.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.podezdKey)
+        etaj.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.etajKey)
+        domofon.textfield.text =  UserDefaults.standard.string(forKey: KeychainManager.keys.domofonKey)
     }
     
 
@@ -149,15 +149,15 @@ extension AdressViewController {
         delegate?.didEnterAdress(adress)
         
         if isSaveOn {
-            KeychainManager.default.saveAdress(adress: self.adress.textfield.text ?? "",
-                                               dolgota: dolgota.textfield.text ?? "",
-                                               shirota: shitota.textfield.text ?? "",
-                                               visota: visota.textfield.text ?? "",
-                                               flat: flat.textfield.text ?? "",
-                                               podezd: podezd.textfield.text ?? "",
-                                               etaj: etaj.textfield.text ?? "",
-                                               domofon: domofon.textfield.text ?? "",
-                                               nameAdress: saveName.textfield.text ?? "")
+            UserDefaults.standard.setValue(self.adress.textfield.text, forKey: KeychainManager.keys.adresskey)
+            UserDefaults.standard.setValue(self.dolgota.textfield.text, forKey: KeychainManager.keys.dolgotaKey)
+            UserDefaults.standard.setValue(self.shitota.textfield.text, forKey: KeychainManager.keys.shirotaKey)
+            UserDefaults.standard.setValue(self.visota.textfield.text, forKey: KeychainManager.keys.visotaKey)
+            UserDefaults.standard.setValue(self.flat.textfield.text, forKey: KeychainManager.keys.flatKey)
+            UserDefaults.standard.setValue(self.podezd.textfield.text, forKey: KeychainManager.keys.podezdKey)
+            UserDefaults.standard.setValue(self.etaj.textfield.text, forKey: KeychainManager.keys.etajKey)
+            UserDefaults.standard.setValue(self.domofon.textfield.text, forKey: KeychainManager.keys.domofonKey)
+            UserDefaults.standard.setValue(self.saveName.textfield.text, forKey: KeychainManager.keys.nameAdressKey)
             
             print("saveOn")
             dismiss(animated: true)

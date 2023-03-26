@@ -24,10 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let network = Network()
-//        let nav = UINavigationController(rootViewController: )
-        
+        let nav = UINavigationController(rootViewController: AuthViewController())
+        nav.isNavigationBarHidden = true
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarViewController()
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
         
         network.checkConnection { isGood in

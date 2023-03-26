@@ -156,15 +156,15 @@ private extension AuthViewController {
             
             let vc = EmailCodeViewController()
     
-            if let savedEmail = KeychainManager.default.get(key: KeychainManager.keys.emailkey), let str = String(data: savedEmail, encoding: .utf8) {
-                if str == emailTextfield.text ?? "" {
+            if let savedEmail = UserDefaults.standard.string(forKey: KeychainManager.keys.emailkey) {
+                if savedEmail == emailTextfield.text ?? "" {
                     print("ok!!!")
                 } else {
-                    KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
+                    UserDefaults.standard.setValue(emailTextfield.text ?? "", forKey: KeychainManager.keys.emailkey)
                     print("Create new email wtf??")
                 }
             } else {
-                KeychainManager.default.add(key: KeychainManager.keys.emailkey, data: emailTextfield.text?.data(using: .utf8) ?? .init())
+                UserDefaults.standard.setValue(emailTextfield.text ?? "", forKey: KeychainManager.keys.emailkey)
                 print("Create new email")
             }
             

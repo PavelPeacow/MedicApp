@@ -255,28 +255,21 @@ class OrderViewController: UIViewController {
     }
     
     func getSavedAdress() {
-        let adressData = KeychainManager.default.get(key: KeychainManager.keys.adresskey)
-        let adressFlatNumberData = KeychainManager.default.get(key: KeychainManager.keys.flatKey)
+        let adress = UserDefaults.standard.string(forKey: KeychainManager.keys.adresskey)
+        let flatNumber = UserDefaults.standard.string(forKey: KeychainManager.keys.flatKey)
        
         
-        if let adressData = adressData, let adressFlatNumberData = adressFlatNumberData {
-            let adress = String(data: adressData, encoding: .utf8)!
-            let flatNumber = String(data: adressFlatNumberData, encoding: .utf8)!
-            
+        if let adress = adress, let flatNumber = flatNumber {
             addressTextfield.textfield.text = " \(adress), кв. \(flatNumber)"
         }
     }
     
     func getSavedPerson() {
-        let surnameData = KeychainManager.default.get(key: KeychainManager.keys.surnameKey)
-        let nameData = KeychainManager.default.get(key: KeychainManager.keys.nameKey)
-        let genderData = KeychainManager.default.get(key: KeychainManager.keys.sexKey)
+        let surname = UserDefaults.standard.string(forKey: KeychainManager.keys.surnameKey)
+        let name = UserDefaults.standard.string(forKey: KeychainManager.keys.nameKey)
+        let gender = UserDefaults.standard.string(forKey: KeychainManager.keys.sexKey)
         
-        if let surnameData = surnameData, let nameData = nameData, let genderData = genderData {
-            let surname = String(data: surnameData, encoding: .utf8)!
-            let name = String(data: nameData, encoding: .utf8)!
-            let gender = String(data: genderData, encoding: .utf8)!
-            
+        if let surname = surname, let name = name, let gender = gender {
             pacientTextfield.textfield.text = "\(gender == "Мужской" ? "🧔" : "👩‍🦰") \(surname) \(name)"
         }
     }
