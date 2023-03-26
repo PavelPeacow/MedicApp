@@ -22,12 +22,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             vc = OnboardingPageViewController()
         }
-        
-        let nav = UINavigationController(rootViewController: PacientCardViewController())
+
+        let network = Network()
+//        let nav = UINavigationController(rootViewController: )
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = nav
+        window?.rootViewController = MainTabBarViewController()
         window?.makeKeyAndVisible()
+        
+        network.checkConnection { isGood in
+            if !isGood {
+                DispatchQueue.main.async {
+                    self.window?.rootViewController?.showInternetConnectionProblemAlert()
+                }
+            }
+        }
         
     }
 

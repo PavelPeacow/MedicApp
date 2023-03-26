@@ -50,6 +50,8 @@
 		B5BC25C829CC8D31000F677F /* CatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */; };
 		B5BC25D229CED316000F677F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = B5BC25D129CED316000F677F /* BottomSheet */; };
 		B5BC25D429CEE2E2000F677F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */; };
+		B5BC25D629CF4D5C000F677F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D529CF4D5C000F677F /* Network.swift */; };
+		B5BC25D829D02A25000F677F /* InternetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D729D02A25000F677F /* InternetAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		B5BC25C729CC8D31000F677F /* CatalogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDetailViewController.swift; sourceTree = "<group>"; };
 		B5BC25C929CD9A72000F677F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		B5BC25D529CF4D5C000F677F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		B5BC25D729D02A25000F677F /* InternetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,8 @@
 				B53A1B9B29C6FAE800ED8F84 /* APIManager.swift */,
 				B53A1BA529C71B4400ED8F84 /* CatalogMock.json */,
 				B53A1B9E29C6FB7A00ED8F84 /* NewsMock.json */,
+				B5BC25D529CF4D5C000F677F /* Network.swift */,
+				B5BC25D729D02A25000F677F /* InternetAlert.swift */,
 			);
 			name = Service;
 			path = Subclass/Service;
@@ -485,6 +491,7 @@
 			files = (
 				B5BBDA8C29BB742500F367AA /* SearchViewController.swift in Sources */,
 				B5A9FD9229B9C7230040F0F4 /* OnboardingPageViewController.swift in Sources */,
+				B5BC25D829D02A25000F677F /* InternetAlert.swift in Sources */,
 				B53A1BC729C9E7F800ED8F84 /* OrderViewController.swift in Sources */,
 				B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
@@ -495,6 +502,7 @@
 				B5BC25D429CEE2E2000F677F /* LoadingViewController.swift in Sources */,
 				B5A9FD9029B9C7230040F0F4 /* SceneDelegate.swift in Sources */,
 				B53A1BD029CAED7400ED8F84 /* FinalPaymentViewController.swift in Sources */,
+				B5BC25D629CF4D5C000F677F /* Network.swift in Sources */,
 				B53A1BA829C71B5500ED8F84 /* CatalogItem.swift in Sources */,
 				B53A1BAF29C8633C00ED8F84 /* MainTabBarViewController.swift in Sources */,
 				B53A1BB229C864C300ED8F84 /* ResultViewController.swift in Sources */,

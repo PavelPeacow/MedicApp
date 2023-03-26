@@ -70,8 +70,6 @@ extension NSCollectionLayoutSection {
 
 class HomeViewController: UIViewController {
     
-    lazy var trainlingConstraint = NSLayoutConstraint()
-    
     var news = [News]()
     lazy var catalog = [CatalogItem]()
     lazy var filteredArrat = [CatalogItem]()
@@ -93,6 +91,12 @@ class HomeViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Искать анализы"
         return searchController
+    }()
+    
+    lazy var pullRefresh: UIRefreshControl = {
+        let resfresh = UIRefreshControl()
+        resfresh.addTarget(self, action: #selector(didPullRefresh), for: .valueChanged)
+        return resfresh
     }()
     
     lazy var collectionView: UICollectionView = {
@@ -119,8 +123,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         view.addSubview(collectionView)
         view.backgroundColor = .systemBackground
+        
+        collectionView.addSubview(pullRefresh)
         
         view.addSubview(cartView)
         
@@ -335,6 +343,29 @@ extension HomeViewController: CatalogDetailViewControllerDelegate {
 }
 
 extension HomeViewController {
+    
+    @objc func didPullRefresh(_ sender: UIRefreshControl) {
+        sender.beginRefreshing()
+        do {
+            let news = try APIManager().makeAPICall(type: [News].self, fileName: "NewsMock")
+            let catalog = try APIManager().makeAPICall(type: [CatalogItem].self, fileName: "CatalogMock")
+            
+            self.news = news
+            self.catalog = catalog
+
+            filteredArrat = catalog.filter { $0.category == "Популярные" }
+            
+            collectionView.reloadData()
+            print(catalog)
+        } catch {
+            print(error)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            sender.endRefreshing()
+        })
+        
+    }
     
     @objc func didTapCartView() {
         let vc = CartViewController()
