@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CatalogCollectionReusableViewDelegate: AnyObject {
-    func didSelectCategory(_ category: String, cell: CategoryCollectionViewCell)
+    func didSelectCategory(_ category: String)
 }
 
 class CatalogCollectionReusableView: UICollectionReusableView {
@@ -18,7 +18,7 @@ class CatalogCollectionReusableView: UICollectionReusableView {
     weak var delegate: CatalogCollectionReusableViewDelegate?
     
     var categoriesTitles = [String]()
-    var selectedCell: CategoryCollectionViewCell?
+    var selectedCell: String = "Популярные"
     
     lazy var catalogTitle: UILabel = {
         let label = UILabel()
@@ -57,18 +57,11 @@ class CatalogCollectionReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(title: String, categoriesDataSource: [String], selectedCategory: CategoryCollectionViewCell?) {
+    func configure(title: String, categoriesDataSource: [String], selectedCategory: String) {
         catalogTitle.text = title
         categoriesTitles = categoriesDataSource
-        
-        if let category = selectedCategory {
-            selectedCell = category
-        } else {
-            layoutIfNeeded()
-            selectedCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoryCollectionViewCell
-            selectedCell?.setSelected()
-        }
-        
+        selectedCell = selectedCategory
+        collectionView.reloadData()
     }
         
 }
@@ -83,6 +76,11 @@ extension CatalogCollectionReusableView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identfier, for: indexPath) as! CategoryCollectionViewCell
         
         cell.configure(title: categoriesTitles[indexPath.row])
+        cell.setUnSelected()
+        
+        if cell.categoryTitle.text! == selectedCell {
+            cell.setSelected()
+        }
         
         return cell
     }
@@ -94,14 +92,9 @@ extension CatalogCollectionReusableView: UICollectionViewDelegate {
         let item = categoriesTitles[indexPath.item]
         let cell = collectionView.cellForItem(at: indexPath) as! CategoryCollectionViewCell
 
-        guard cell != selectedCell else {
-            return
-        }
-        selectedCell?.setUnSelected()
-        selectedCell = cell
         cell.setSelected()
         
-        delegate?.didSelectCategory(item, cell: cell)
+        delegate?.didSelectCategory(item)
     }
     
 }

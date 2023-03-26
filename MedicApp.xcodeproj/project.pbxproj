@@ -52,6 +52,8 @@
 		B5BC25D429CEE2E2000F677F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */; };
 		B5BC25D629CF4D5C000F677F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D529CF4D5C000F677F /* Network.swift */; };
 		B5BC25D829D02A25000F677F /* InternetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D729D02A25000F677F /* InternetAlert.swift */; };
+		B5BC25DA29D04AB2000F677F /* SendCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D929D04AB2000F677F /* SendCode.swift */; };
+		B5BC25DC29D04DBE000F677F /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25DB29D04DBE000F677F /* SignIn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		B5BC25D329CEE2E2000F677F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		B5BC25D529CF4D5C000F677F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		B5BC25D729D02A25000F677F /* InternetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAlert.swift; sourceTree = "<group>"; };
+		B5BC25D929D04AB2000F677F /* SendCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCode.swift; sourceTree = "<group>"; };
+		B5BC25DB29D04DBE000F677F /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,8 @@
 			children = (
 				B53A1BA029C6FB9700ED8F84 /* News.swift */,
 				B53A1BA729C71B5500ED8F84 /* CatalogItem.swift */,
+				B5BC25D929D04AB2000F677F /* SendCode.swift */,
+				B5BC25DB29D04DBE000F677F /* SignIn.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				B53A1BC729C9E7F800ED8F84 /* OrderViewController.swift in Sources */,
 				B53A1BA429C7047400ED8F84 /* UIImageViewURL.swift in Sources */,
 				B5A9FD8E29B9C7230040F0F4 /* AppDelegate.swift in Sources */,
+				B5BC25DA29D04AB2000F677F /* SendCode.swift in Sources */,
 				B53A1BBC29C88F4700ED8F84 /* CartViewMain.swift in Sources */,
 				B5BBDA7F29B9DDF500F367AA /* AuthViewController.swift in Sources */,
 				B53A1B9629C6EC3B00ED8F84 /* NewsCollectionReusableView.swift in Sources */,
@@ -510,6 +517,7 @@
 				B53A1BCC29CAD4B500ED8F84 /* AdressViewController.swift in Sources */,
 				B53A1B9429C6EC2B00ED8F84 /* CatalogCollectionReusableView.swift in Sources */,
 				B53A1BC929C9F4E600ED8F84 /* InputTextfieldWithTitle.swift in Sources */,
+				B5BC25DC29D04DBE000F677F /* SignIn.swift in Sources */,
 				B5BBDA8829BB72C800F367AA /* HomeViewController.swift in Sources */,
 				B53A1B9A29C6F37F00ED8F84 /* CategoryCollectionViewCell.swift in Sources */,
 				B5952D6129C0D9A100DD8427 /* EmailCodeTextfield.swift in Sources */,

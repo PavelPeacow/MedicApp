@@ -74,7 +74,7 @@ class HomeViewController: UIViewController {
     lazy var catalog = [CatalogItem]()
     lazy var filteredArrat = [CatalogItem]()
     
-    var selectedCategory: CategoryCollectionViewCell?
+    var selectedCategory: String = "Популярные"
     
     var selectedItemsForBy = [CatalogItem]()
     
@@ -132,20 +132,23 @@ class HomeViewController: UIViewController {
         
         view.addSubview(cartView)
         
-        do {
-            let news = try APIManager().makeAPICall(type: [News].self, fileName: "NewsMock")
-            let catalog = try APIManager().makeAPICall(type: [CatalogItem].self, fileName: "CatalogMock")
-            
-            self.news = news
-            self.catalog = catalog
+        Task {
+            do {
+                let news = try await APIManager().makeAPICall(type: [News].self, endpoint: .news)
+                let catalog = try await APIManager().makeAPICall(type: [CatalogItem].self, endpoint: .catalog)
+                
+                self.news = news
+                self.catalog = catalog
 
-            filteredArrat = catalog.filter { $0.category == "Популярные" }
-            
-            collectionView.reloadData()
-            print(catalog)
-        } catch {
-            print(error)
+                filteredArrat = catalog.filter { $0.category == "Популярные" }
+                
+                collectionView.reloadData()
+    
+            } catch {
+                print(error)
+            }
         }
+        
         
         
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -278,8 +281,8 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: CatalogCollectionReusableViewDelegate {
     
-    func didSelectCategory(_ category: String, cell: CategoryCollectionViewCell) {
-        selectedCategory = cell
+    func didSelectCategory(_ category: String) {
+        selectedCategory = category
         filteredArrat = catalog.filter { $0.category == category }
         UIView.transition(with: collectionView, duration: 0.15, options: .transitionCrossDissolve) {
             self.collectionView.reloadData()
@@ -346,25 +349,24 @@ extension HomeViewController {
     
     @objc func didPullRefresh(_ sender: UIRefreshControl) {
         sender.beginRefreshing()
-        do {
-            let news = try APIManager().makeAPICall(type: [News].self, fileName: "NewsMock")
-            let catalog = try APIManager().makeAPICall(type: [CatalogItem].self, fileName: "CatalogMock")
-            
-            self.news = news
-            self.catalog = catalog
+        Task {
+            do {
+                let news = try await APIManager().makeAPICall(type: [News].self, endpoint: .news)
+                let catalog = try await APIManager().makeAPICall(type: [CatalogItem].self, endpoint: .catalog)
+                
+                self.news = news
+                self.catalog = catalog
 
-            filteredArrat = catalog.filter { $0.category == "Популярные" }
-            
-            collectionView.reloadData()
-            print(catalog)
-        } catch {
-            print(error)
+                filteredArrat = catalog.filter { $0.category == "Популярные" }
+                
+                collectionView.reloadData()
+                print(catalog)
+                sender.endRefreshing()
+            } catch {
+                print(error)
+            }
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            sender.endRefreshing()
-        })
-        
+
     }
     
     @objc func didTapCartView() {

@@ -10,7 +10,7 @@ import UIKit
 class EmailCodeViewController: UIViewController {
     
     private var timer: Timer?
-    private var counter = 1 {
+    private var counter = 5 {
         didSet {
             tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
         }
@@ -18,8 +18,10 @@ class EmailCodeViewController: UIViewController {
     
     private var needCode: String?
     
+    var resultMessage: String = ""
+    
     private lazy var stackViewMain: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [emailTitle, stackViewTextfields, tryAgainLabel, tryAgainBtn])
+        let stackView = UIStackView(arrangedSubviews: [emailTitle, stackViewTextfields, tryAgainLabel])
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .vertical
@@ -79,15 +81,6 @@ class EmailCodeViewController: UIViewController {
         return label
     }()
     
-    private lazy var tryAgainBtn: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Отправить заново", for: .normal)
-        btn.setTitleColor(.blue, for: .normal)
-        btn.addTarget(self, action: #selector(didTapTryAgainBtn), for: .touchUpInside)
-        btn.isHidden = true
-        return btn
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,6 +107,54 @@ class EmailCodeViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let loadingView = UIActivityIndicatorView(style: .large)
+        
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(loadingView)
+        
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        Task {
+            loadingView.startAnimating()
+            view.alpha = 0.5
+            await makeApiCall()
+            createNotification()
+            view.alpha = 1.0
+            loadingView.removeFromSuperview()
+        }
+        
+    }
+    
+    func makeApiCall() async {
+        do {
+            let result = try await APIManager().makeAPICall(type: SendCode.self, endpoint: .sendCode(email: KeychainManager.email))
+            print(result)
+            resultMessage = result.message
+        } catch {
+            print(error)
+        }
+    }
+    
+    func signInCall(email: String, code: String) async -> Bool {
+        do {
+            let result = try await APIManager().makeAPICall(type: SignIn.self, endpoint: .signIn(email: email, code: code))
+            UserDefaults.standard.setValue(result.token, forKey: KeychainManager.keys.token)
+            print(result.token)
+            print("token saved")
+            return true
+        } catch {
+            print(error)
+            return false
+        }
     }
     
     private func addTargets() {
@@ -163,9 +204,7 @@ class EmailCodeViewController: UIViewController {
         let content = UNMutableNotificationContent()
         content.badge = 1
         content.title = "Code"
-        content.subtitle = code
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        content.subtitle = resultMessage
         
         let request = UNNotificationRequest(identifier: "lol", content: content, trigger: nil)
         
@@ -191,24 +230,18 @@ private extension EmailCodeViewController {
     @objc func updateTimer() {
         if counter > 0 {
             counter -= 1
-            //            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
         } else {
-            counter = 15
-            //            tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
+            counter = 60
             print("che")
-            createNotification()
+            Task {
+                await makeApiCall()
+                createNotification()
+            }
+            
         }
     }
     
-    @objc func didTapTryAgainBtn() {
-        counter = 5
-        tryAgainLabel.text = "Отправить код повторно можно будет через \(counter) секунд"
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        tryAgainBtn.isHidden = true
-        tryAgainLabel.isHidden = false
-        print("again")
-    }
-    
+
 }
 
 extension EmailCodeViewController: UITextFieldDelegate {
@@ -224,26 +257,35 @@ extension EmailCodeViewController: UITextFieldDelegate {
             return
         }
         
-        if getEnterdCode() == needCode {
-            
-            let vc = CreatePasswordViewController()
-            
-            if let password = UserDefaults.standard.string(forKey: KeychainManager.keys.passwordKey) {
-                print(password)
+        let enteredCode = getEnterdCode()
+        
+        if enteredCode.count == 4 {
+            Task {
+                let isRight = await signInCall(email: KeychainManager.email, code: enteredCode)
                 
-                if password == "skip" {
-                    vc.setPasswordState(state: .skipedPassword)
-                } else {
-                    vc.setPasswordState(state: .alreadyCreated)
+                if isRight {
+                    let vc = CreatePasswordViewController()
+                    
+                    if let password = UserDefaults.standard.string(forKey: KeychainManager.keys.passwordKey) {
+                        print(password)
+                        
+                        if password == "skip" {
+                            vc.setPasswordState(state: .skipedPassword)
+                        } else {
+                            vc.setPasswordState(state: .alreadyCreated)
+                        }
+                        
+                    } else {
+                        vc.setPasswordState(state: .skipedPassword)
+                    }
+                    
+                    navigationController?.setViewControllers([vc], animated: true)
                 }
-                
-            } else {
-                vc.setPasswordState(state: .skipedPassword)
             }
-            
-            navigationController?.setViewControllers([vc], animated: true)
-            
         }
+        
+            
+        
         getNextTextfield(textField: sender)
     }
     

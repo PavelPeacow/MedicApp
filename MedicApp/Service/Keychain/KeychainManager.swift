@@ -13,9 +13,12 @@ class KeychainManager {
     
     static var email = ""
     
+    
     static let `default` = KeychainManager()
     
     enum keys {
+        static let token = "\(email)-tokenKey"
+        
         static let emailkey = "\(email)-emailkey"
         static let passwordKey = "\(email)-passwordKey"
         static let nameKey = "\(email)-nameKey"
@@ -34,23 +37,6 @@ class KeychainManager {
         static let domofonKey = "\(email)-domofonKey"
         static let nameAdressKey = "\(email)-nameAdressKey"
     }
-    
-//    func saveAdress(adress: String, dolgota: String, shirota: String,
-//                    visota: String, flat: String, podezd: String,
-//                    etaj: String, domofon: String, nameAdress: String) {
-//        
-//        add(key: KeychainManager.keys.adresskey, data: adress.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.dolgotaKey, data: dolgota.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.shirotaKey, data: shirota.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.visotaKey, data: visota.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.flatKey, data: flat.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.podezdKey, data: podezd.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.etajKey, data: etaj.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.domofonKey, data: domofon.data(using: .utf8)!)
-//        add(key: KeychainManager.keys.nameAdressKey, data: nameAdress.data(using: .utf8)!)
-//        
-//    }
-    
  
     
     
