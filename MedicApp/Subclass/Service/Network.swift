@@ -26,10 +26,10 @@ class Network {
         monitorInternet.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("Internet connection is available.")
-                onChange(true)
+                onChange(false)
             } else {
                 print("Internet connection is not available.")
-                onChange(false)
+                onChange(true)
             }
         }
     }

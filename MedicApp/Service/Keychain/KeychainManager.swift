@@ -13,9 +13,6 @@ class KeychainManager {
     
     static var email = ""
     
-    
-    static let `default` = KeychainManager()
-    
     enum keys {
         static let token = "\(email)-tokenKey"
         

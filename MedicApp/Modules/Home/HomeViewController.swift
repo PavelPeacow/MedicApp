@@ -132,7 +132,18 @@ class HomeViewController: UIViewController {
         
         view.addSubview(cartView)
         
+        let loadingView = UIActivityIndicatorView(style: .large)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingView)
+        
+        NSLayoutConstraint.activate([
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+        
         Task {
+            view.alpha = 0.5
+            loadingView.startAnimating()
             do {
                 let news = try await APIManager().makeAPICall(type: [News].self, endpoint: .news)
                 let catalog = try await APIManager().makeAPICall(type: [CatalogItem].self, endpoint: .catalog)
@@ -147,6 +158,8 @@ class HomeViewController: UIViewController {
             } catch {
                 print(error)
             }
+            view.alpha = 1.0
+            loadingView.removeFromSuperview()
         }
         
         

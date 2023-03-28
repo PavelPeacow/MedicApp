@@ -54,6 +54,7 @@
 		B5BC25D829D02A25000F677F /* InternetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D729D02A25000F677F /* InternetAlert.swift */; };
 		B5BC25DA29D04AB2000F677F /* SendCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25D929D04AB2000F677F /* SendCode.swift */; };
 		B5BC25DC29D04DBE000F677F /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25DB29D04DBE000F677F /* SignIn.swift */; };
+		B5BC25DE29D31ACE000F677F /* CreateLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC25DD29D31ACE000F677F /* CreateLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		B5BC25D729D02A25000F677F /* InternetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAlert.swift; sourceTree = "<group>"; };
 		B5BC25D929D04AB2000F677F /* SendCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCode.swift; sourceTree = "<group>"; };
 		B5BC25DB29D04DBE000F677F /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		B5BC25DD29D31ACE000F677F /* CreateLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				B53A1B9E29C6FB7A00ED8F84 /* NewsMock.json */,
 				B5BC25D529CF4D5C000F677F /* Network.swift */,
 				B5BC25D729D02A25000F677F /* InternetAlert.swift */,
+				B5BC25DD29D31ACE000F677F /* CreateLoadingView.swift */,
 			);
 			name = Service;
 			path = Subclass/Service;
@@ -526,6 +529,7 @@
 				B5BC184F29C1F33200809824 /* KeychainManager.swift in Sources */,
 				B5BBDA8229B9EA1200F367AA /* EmailCodeViewController.swift in Sources */,
 				B53A1BBE29C9DCDE00ED8F84 /* PacientCardViewController.swift in Sources */,
+				B5BC25DE29D31ACE000F677F /* CreateLoadingView.swift in Sources */,
 				B5BBDA8429BA1C3500F367AA /* CreatePasswordViewController.swift in Sources */,
 				B5BC25C829CC8D31000F677F /* CatalogDetailViewController.swift in Sources */,
 				B53A1BCE29CAE04000ED8F84 /* SelectDateViewController.swift in Sources */,

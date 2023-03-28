@@ -261,6 +261,11 @@ extension EmailCodeViewController: UITextFieldDelegate {
         
         if enteredCode.count == 4 {
             Task {
+                let loadView = createLoadingView()
+                loadView.startAnimating()
+                view.alpha = 0.5
+                
+                
                 let isRight = await signInCall(email: KeychainManager.email, code: enteredCode)
                 
                 if isRight {
@@ -281,6 +286,9 @@ extension EmailCodeViewController: UITextFieldDelegate {
                     
                     navigationController?.setViewControllers([vc], animated: true)
                 }
+                
+                loadView.removeFromSuperview()
+                view.alpha = 1.0
             }
         }
         
@@ -290,6 +298,8 @@ extension EmailCodeViewController: UITextFieldDelegate {
     }
     
 }
+
+
 
 private extension EmailCodeViewController {
     

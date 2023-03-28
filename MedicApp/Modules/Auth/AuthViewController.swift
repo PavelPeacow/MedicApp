@@ -111,7 +111,7 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBtnState(text: nil)
+        setBtnState(text: "")
         
         view.backgroundColor = .systemBackground
         view.addSubview(stackViewWelcome)
@@ -122,7 +122,7 @@ class AuthViewController: UIViewController {
     }
     
     private func setBtnState(text: String?) {
-        guard let text = text, !text.isEmpty else {
+        guard validateEmail(text!) else {
             logInBtn.alpha = 0.5
             logInBtn.isUserInteractionEnabled = false
             return
@@ -136,12 +136,12 @@ class AuthViewController: UIViewController {
     func validateEmail(_ email: String) -> Bool {
         guard let regex = try? NSRegularExpression(pattern: "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[a-z]{2,}$") else { return false }
         if let _ = regex.firstMatch(in: email, range: NSRange(location: 0, length: email.count)) {
+            print("c")
             return true
         }
         return false
     }
         
-    
 }
 
 
