@@ -8,7 +8,7 @@
 import UIKit
 
 class ChatViewController: UIViewController {
-     
+      
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "logo")
