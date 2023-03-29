@@ -8,7 +8,7 @@
 import UIKit
 
 class InputTextfieldWithTitle: UIView {
-    
+ 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [label, textfield])
         stackView.alignment = .fill
